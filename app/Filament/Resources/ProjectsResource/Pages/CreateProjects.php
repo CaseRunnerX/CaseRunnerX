@@ -9,4 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProjects extends CreateRecord
 {
     protected static string $resource = ProjectsResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['author'] = auth()->id();
+
+        return $data;
+    }
 }

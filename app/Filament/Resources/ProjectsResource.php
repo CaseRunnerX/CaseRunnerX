@@ -72,7 +72,9 @@ class ProjectsResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\TextInput::make('author')
-                    ->label('Author'),
+                    ->label('Author')
+                    ->disabled()
+                    ->visibleOn('view'),
                     Forms\Components\Textarea::make('computing_environment')
                     ->label('Type of Computing Environment'),
                     Forms\Components\Textarea::make('software_type')
