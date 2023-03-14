@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "marjose123/filament-lockscreen": "^1.1",
         "marjose123/filament-no-connection": "^1.0",
+        "mohamedsabil83/filament-forms-tinyeditor": "^1.7",
         "shuvroroy/filament-spatie-laravel-backup": "^1.2",
         "shuvroroy/filament-spatie-laravel-health": "^1.6",
         "spatie/security-advisories-health-check": "^1.0",
