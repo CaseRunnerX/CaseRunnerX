@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "622c253878070253e490ef54864e31a5",
+    "content-hash": "852d86dc2ec1efb9faba459c7cfebda9",
     "packages": [
         {
             "name": "3x1io/filament-user",
@@ -142,6 +142,61 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/4.0.0"
             },
             "time": "2023-02-14T18:09:30+00:00"
+        },
+        {
+            "name": "alfa6661/laravel-autonumber",
+            "version": "1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alfa6661/laravel-autonumber.git",
+                "reference": "cb97bd9d6b7b44696aca5d14d385958a1ac41d95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alfa6661/laravel-autonumber/zipball/cb97bd9d6b7b44696aca5d14d385958a1ac41d95",
+                "reference": "cb97bd9d6b7b44696aca5d14d385958a1ac41d95",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^5.1|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/database": "^5.1|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.1|^6.0|^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Alfa6661\\AutoNumber\\AutoNumberServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Alfa6661\\AutoNumber\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alfa Adhitya",
+                    "email": "alfa2159@gmail.com"
+                }
+            ],
+            "description": "Laravel package to create autonumber for Eloquent model",
+            "homepage": "https://github.com/alfa6661/laravel-autonumber",
+            "keywords": [
+                "autonumber",
+                "eloquent",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/alfa6661/laravel-autonumber/issues",
+                "source": "https://github.com/alfa6661/laravel-autonumber/tree/1.2.5"
+            },
+            "time": "2022-08-09T02:31:25+00:00"
         },
         {
             "name": "awcodes/filament-quick-create",
@@ -8514,6 +8569,61 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wildside/userstamps",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WildsideUK/Laravel-Userstamps.git",
+                "reference": "371cfbf5fda1872cc487888c6a8ac01e3e8249aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WildsideUK/Laravel-Userstamps/zipball/371cfbf5fda1872cc487888c6a8ac01e3e8249aa",
+                "reference": "371cfbf5fda1872cc487888c6a8ac01e3e8249aa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.2|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/database": "^5.2|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^5.0|^6.0|^7.0|^8.4|^9.0|^10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wildside\\Userstamps\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WILDSIDE",
+                    "email": "hello@wildside.uk",
+                    "homepage": "https://wildside.uk"
+                }
+            ],
+            "description": "Laravel Userstamps provides an Eloquent trait which automatically maintains `created_by` and `updated_by` columns on your model, populated by the currently authenticated user in your application.",
+            "keywords": [
+                "created_by",
+                "deleted_by",
+                "eloquent",
+                "laravel",
+                "updated_by",
+                "userstamps"
+            ],
+            "support": {
+                "issues": "https://github.com/WildsideUK/Laravel-Userstamps/issues",
+                "source": "https://github.com/WildsideUK/Laravel-Userstamps/tree/2.3.0"
+            },
+            "time": "2023-02-15T09:35:24+00:00"
         }
     ],
     "packages-dev": [
