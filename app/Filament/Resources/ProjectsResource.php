@@ -132,8 +132,10 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('project_type'),
                 Tables\Columns\TextColumn::make('assigned_qa'),
                 Tables\Columns\TextColumn::make('assigned_account_manager'),
-                Tables\Columns\TextColumn::make('test_plan'),
-                Tables\Columns\TextColumn::make('project_name'),
+                Tables\Columns\TextColumn::make('test_plan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('project_name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('author.name'),
             ])
             ->filters([
