@@ -15,6 +15,11 @@ class ViewMilestone extends ViewRecord
     {
         return [
             Actions\EditAction::make(),
+            Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make()
+                ->visible(fn(): bool => isset($this->record->deleted_at) ?? false),
+            Actions\RestoreAction::make()
+                ->visible(fn(): bool => isset($this->record->deleted_at) ?? false),
         ];
     }
 
