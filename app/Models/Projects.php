@@ -5,6 +5,7 @@ namespace App\Models;
 use Alfa6661\AutoNumber\AutoNumberTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
 
@@ -57,5 +58,10 @@ class Projects extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    public function milestone(): hasMany
+    {
+        return $this->hasMany(Milestone::class, 'id', 'test_plan_id');
     }
 }
