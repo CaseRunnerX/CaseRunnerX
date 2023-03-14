@@ -81,3 +81,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 - [MarJose](https://github.com/MarJose123)
 - [All Contributors](../../contributors)
+
+
+## License
+software licensed under the [Apache License 2.0 license](https://opensource.org/license/apache-2-0/).
