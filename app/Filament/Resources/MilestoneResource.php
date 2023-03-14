@@ -26,6 +26,7 @@ class MilestoneResource extends Resource
             ->schema([
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Select::make('test_plan_id')
+                        ->label('Project')
                         ->options(Projects::all()->pluck('test_plan', 'id'))
                         ->required(),
                     Forms\Components\TextInput::make('milestone_name')
