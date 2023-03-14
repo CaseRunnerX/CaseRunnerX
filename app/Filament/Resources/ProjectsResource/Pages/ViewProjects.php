@@ -25,9 +25,10 @@ class ViewProjects extends ViewRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['created_by'] = User::find($data['created_by'])->creator;
-        $data['updated_by'] = User::find($data['updated_by'])->editor;
-        $data['deleted_by'] = User::find($data['deleted_by'])->destroyer;
+        $data['created_by'] = $this->record->creator->name ?? null;
+        $data['updated_by'] = $this->record->editor->name ?? null;
+        $data['deleted_by'] = $this->record->destroyer->name ?? null;
+        $data['author'] =  User::find($data['author'])->name;
 
         return $data;
     }

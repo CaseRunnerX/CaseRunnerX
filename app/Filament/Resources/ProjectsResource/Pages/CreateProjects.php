@@ -13,6 +13,7 @@ class CreateProjects extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['author'] = auth()->id();
+        $data['test_plan'] = auth()->id();
 
         return $data;
     }
