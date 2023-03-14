@@ -22,7 +22,7 @@ class Projects extends Model
         'assigned_account_manager',
         'test_plan',
         'project_name',
-        'author',
+        'author_id',
         'computing_environment',
         'software_type',
         'testing_purposes',
@@ -56,6 +56,6 @@ class Projects extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'author');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 }

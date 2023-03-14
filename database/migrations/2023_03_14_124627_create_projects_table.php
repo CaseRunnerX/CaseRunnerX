@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('assigned_account_manager');
             $table->string('test_plan')->nullable();
             $table->string('project_name');
-            $table->unsignedBigInteger('author')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->longText('computing_environment')->nullable();
             $table->longText('software_type')->nullable();
             $table->longText('testing_purposes');
