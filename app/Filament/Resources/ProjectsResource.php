@@ -71,8 +71,10 @@ class ProjectsResource extends Resource
                         ->label('Project Name')
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('author')
-                    ->label('Author'),
+                    Forms\Components\TextInput::make('author_id')
+                    ->label('Author')
+                    ->disabled()
+                    ->visibleOn('view'),
                     Forms\Components\Textarea::make('computing_environment')
                     ->label('Type of Computing Environment'),
                     Forms\Components\Textarea::make('software_type')
@@ -130,38 +132,13 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('account'),
                 Tables\Columns\TextColumn::make('application'),
                 Tables\Columns\TextColumn::make('project_type'),
-                Tables\Columns\TextColumn::make('assigned_project_manager'),
-                Tables\Columns\TextColumn::make('assigned_developer'),
                 Tables\Columns\TextColumn::make('assigned_qa'),
                 Tables\Columns\TextColumn::make('assigned_account_manager'),
-                Tables\Columns\TextColumn::make('test_plan'),
-                Tables\Columns\TextColumn::make('project_name'),
+                Tables\Columns\TextColumn::make('test_plan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('project_name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('author.name'),
-                Tables\Columns\TextColumn::make('computing_environment'),
-                Tables\Columns\TextColumn::make('software_type'),
-                Tables\Columns\TextColumn::make('testing_purposes'),
-                Tables\Columns\TextColumn::make('user_demo_graphics'),
-                Tables\Columns\TextColumn::make('assumptions'),
-                Tables\Columns\TextColumn::make('testing_phases'),
-                Tables\Columns\TextColumn::make('testing_scope'),
-                Tables\Columns\TextColumn::make('critical_success_factor'),
-                Tables\Columns\TextColumn::make('type_of_testing'),
-                Tables\Columns\TextColumn::make('tester_profile'),
-                Tables\Columns\TextColumn::make('test_reference'),
-                Tables\Columns\TextColumn::make('test_deliverable'),
-                Tables\Columns\TextColumn::make('development_test_tools'),
-                Tables\Columns\TextColumn::make('business_operational_concern'),
-                Tables\Columns\TextColumn::make('risk'),
-                Tables\Columns\TextColumn::make('other'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_by'),
-                Tables\Columns\TextColumn::make('updated_by'),
-                Tables\Columns\TextColumn::make('deleted_by'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
