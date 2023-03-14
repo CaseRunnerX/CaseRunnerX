@@ -13,7 +13,7 @@ class Suites extends Model
     use SoftDeletes, AutoNumberTrait, Userstamps;
 
     protected $fillable = [
-        'milestone',
+        'milestone_id',
         'suite_name',
         'suite_number',
         'description',
@@ -37,6 +37,6 @@ class Suites extends Model
      */
     public function milestone(): BelongsTo
     {
-        return $this->belongsTo(Milestone::class, 'milestone', 'id');
+        return $this->belongsTo(Milestone::class, 'milestone_id', 'id');
     }
 }

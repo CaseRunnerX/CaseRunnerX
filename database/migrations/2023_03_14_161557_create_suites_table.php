@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('suites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('milestone');
+            $table->foreignId('milestone_id');
             $table->string('suite_name');
             $table->string('suite_number');
             $table->longText('description')->nullable();
