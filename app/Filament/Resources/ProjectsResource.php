@@ -71,7 +71,7 @@ class ProjectsResource extends Resource
                         ->label('Project Name')
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('author')
+                    Forms\Components\TextInput::make('author_id')
                     ->label('Author')
                     ->disabled()
                     ->visibleOn('view'),
