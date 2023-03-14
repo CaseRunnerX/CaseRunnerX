@@ -5,11 +5,12 @@ namespace App\Models;
 use Alfa6661\AutoNumber\AutoNumberTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
 
 class Projects extends Model
 {
-    use Userstamps, AutoNumberTrait;
+    use Userstamps, AutoNumberTrait, SoftDeletes;
 
     protected $fillable = [
         'account',
