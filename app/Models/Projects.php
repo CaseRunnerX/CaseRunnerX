@@ -47,8 +47,8 @@ class Projects extends Model
     public function getAutoNumberOptions()
     {
         return [
-            'account' => [
-                'format' => $this->test_plan.' - ?', // autonumber format. '?' will be replaced with the generated number.
+            'test_plan' => [
+                'format' => $this->account.' - ?', // autonumber format. '?' will be replaced with the generated number.
                 'length' => 5 // The number of digits in an autonumber
             ]
         ];
