@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('assigned_developer');
             $table->string('assigned_qa');
             $table->string('assigned_account_manager');
-            $table->string('test_plan');
+            $table->string('test_plan')->nullable();
             $table->string('project_name');
             $table->unsignedBigInteger('author')->nullable();
             $table->longText('computing_environment')->nullable();
