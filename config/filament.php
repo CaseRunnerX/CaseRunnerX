@@ -141,6 +141,7 @@ return [
         'path' => app_path('Filament/Widgets'),
         'register' => [
             Widgets\AccountWidget::class,
+            \Awcodes\Overlook\Overlook::class,
         ],
     ],
 
