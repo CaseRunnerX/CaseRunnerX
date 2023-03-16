@@ -17,6 +17,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ---
 
+## Prerequisite
+
+Enable this additionals php extension:
+```
+1. sqlite
+
+```
+
 ## Installation
 
 Step 1. and then cd to your clone repo and run this on your command
