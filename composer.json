@@ -9,6 +9,7 @@
         "3x1io/filament-user": "^1.1",
         "alfa6661/laravel-autonumber": "^1.2",
         "awcodes/filament-quick-create": "^2.1",
+        "awcodes/overlook": "^1.0",
         "bezhansalleh/filament-shield": "^2.4",
         "filament/filament": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
