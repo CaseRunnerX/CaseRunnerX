@@ -27,6 +27,10 @@ class Cases extends Model
         'deleted_by'
     ];
 
+    protected $casts = [
+        'steps' => 'array'
+    ];
+
     public function getAutoNumberOptions()
     {
         return [
