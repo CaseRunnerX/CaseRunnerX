@@ -28,8 +28,6 @@ class ViewProjects extends ViewRecord
         $data['created_by'] = $this->record->creator->name ?? null;
         $data['updated_by'] = $this->record->editor->name ?? null;
         $data['deleted_by'] = $this->record->destroyer->name ?? null;
-        $data['author'] =  User::find($data['author_id'])->name;
-
         return $data;
     }
 
