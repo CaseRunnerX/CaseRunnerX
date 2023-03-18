@@ -62,6 +62,6 @@ class Projects extends Model
 
     public function milestone(): hasMany
     {
-        return $this->hasMany(Milestone::class, 'id', 'test_plan_id');
+        return $this->hasMany(Milestone::class, 'test_plan_id', 'id');
     }
 }
