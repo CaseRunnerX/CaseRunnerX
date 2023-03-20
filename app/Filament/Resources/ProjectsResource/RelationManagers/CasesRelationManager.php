@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use App\Models\Suites;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Contracts\HasRelationshipTable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
@@ -74,15 +77,18 @@ class CasesRelationManager extends RelationManager
                     ]),
                     TinyEditor::make('expected_result')
                         ->required(),
-                    TinyEditor::make('actual_result')
-                        ->required(),
-                    TinyEditor::make('defect'),
-                    TinyEditor::make('failure'),
-                    TinyEditor::make('effect'),
-                    TinyEditor::make('root_cause'),
-                    Forms\Components\TextInput::make('issue_id')
-                        ->label('Issue ID')
-                        ->maxLength(255),
+                    Forms\Components\Card::make()->schema([
+                        TinyEditor::make('actual_result')
+                            ->required(),
+                        TinyEditor::make('defect'),
+                        TinyEditor::make('failure'),
+                        TinyEditor::make('effect'),
+                        TinyEditor::make('root_cause'),
+                        Forms\Components\TextInput::make('issue_id')
+                            ->label('Issue ID')
+                            ->maxLength(255),
+                    ])->visibleOn(['view', 'edit']),
+
                 ])->columns(1),
                 Forms\Components\Card::make()->schema([
                     Forms\Components\TextInput::make('created_by'),
@@ -109,11 +115,19 @@ class CasesRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make()
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->using(function (HasRelationshipTable $livewire, array $data): Model {
+                        return $livewire->getRelationship()->create($data);
+                    }),
                 Tables\Actions\AssociateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->mutateRecordDataUsing(function (array $data): array {
+                        $data['created_by'] = User::find($data['created_by'])?->name ?? null;
+                        $data['updated_by'] = User::find($data['updated_by'])?->name ?? null;
+                        return $data;
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DissociateAction::make(),
                 Tables\Actions\DeleteAction::make(),
