@@ -19,14 +19,12 @@ class Run extends Model
         'assigned_qa',
         'test_suite_id',
         'status',
-        'status',
-        'defect',
-        'failure',
-        'effect',
-        'root_cause',
-        'issue_id',
         'created_by',
         'updated_by',
         'deleted_by'
+    ];
+
+    protected $casts = [
+        'test_suite_id' => 'array'
     ];
 }

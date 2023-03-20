@@ -158,7 +158,8 @@ class ProjectsResource extends Resource
     {
         return [
            RelationManagers\MilestoneRelationManager::class,
-           RelationManagers\SuitesRelationManager::class
+           RelationManagers\SuitesRelationManager::class,
+           RelationManagers\CasesRelationManager::class
         ];
     }
 

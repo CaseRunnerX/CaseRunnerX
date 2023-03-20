@@ -22,6 +22,12 @@ class Cases extends Model
         'reference',
         'steps',
         'expected_result',
+        'status',
+        'defect',
+        'failure',
+        'effect',
+        'root_cause',
+        'issue_id',
         'created_by',
         'updated_by',
         'deleted_by'

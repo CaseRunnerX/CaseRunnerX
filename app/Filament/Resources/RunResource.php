@@ -34,7 +34,9 @@ class RunResource extends Resource
                     TinyEditor::make('references')
                         ->required(),
                     Forms\Components\Select::make('milestone_id')
+                        ->label('Milestone')
                         ->options(Milestone::all()->pluck('milestone_name', 'id'))
+                        ->reactive()
                         ->required(),
                     Forms\Components\Textarea::make('description')
                         ->required(),
@@ -42,7 +44,8 @@ class RunResource extends Resource
                         ->label('Assigned QA'),
                     Forms\Components\Select::make('test_suite_id')
                         ->label('Test Suite')
-                        ->options(Suites::all()->pluck('suite_name', 'id'))
+                        ->multiple()
+                        ->options(fn(\Closure $get) => Suites::all()->where('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
                         ->required(),
                     Forms\Components\Select::make('status')
                         ->options([
@@ -54,15 +57,6 @@ class RunResource extends Resource
                         ])
                         ->default('To be Tested')
                         ->required(),
-                    TinyEditor::make('actual_result')
-                        ->required(),
-                    TinyEditor::make('defect'),
-                    TinyEditor::make('failure'),
-                    TinyEditor::make('effect'),
-                    TinyEditor::make('root_cause'),
-                    Forms\Components\TextInput::make('issue_id')
-                        ->label('Issue ID')
-                        ->maxLength(255),
                 ]),
                 Forms\Components\Card::make()->schema([
                     Forms\Components\TextInput::make('created_by'),
@@ -87,12 +81,6 @@ class RunResource extends Resource
                 Tables\Columns\TextColumn::make('assigned_qa'),
                 Tables\Columns\TextColumn::make('test_suite_id'),
                 Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('actual_result'),
-                Tables\Columns\TextColumn::make('defect'),
-                Tables\Columns\TextColumn::make('failure'),
-                Tables\Columns\TextColumn::make('effect'),
-                Tables\Columns\TextColumn::make('root_cause'),
-                Tables\Columns\TextColumn::make('issue_id'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

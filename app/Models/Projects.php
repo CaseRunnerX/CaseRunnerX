@@ -69,4 +69,9 @@ class Projects extends Model
     {
         return $this->hasMany(Suites::class, 'test_plan_id', 'id');
     }
+
+    public function cases(): hasMany
+    {
+        return $this->hasMany(Cases::class, 'test_plan_id', 'id');
+    }
 }
