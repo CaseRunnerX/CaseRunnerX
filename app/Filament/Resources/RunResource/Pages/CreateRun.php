@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\RunResource\Pages;
 
 use App\Filament\Resources\RunResource;
+use App\Models\RunCase;
 use App\Models\Suites;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
@@ -22,9 +23,16 @@ class CreateRun extends CreateRecord
 
         foreach ($test_suites as $key => $value)
         {
+
             // get all the test case record
-            $case = Suites::find($value)->testCases()->get();
-            ddd($case);
+           foreach (Suites::find($value)->testCases()->get() as $case)
+           {
+               $runcase = new RunCase();
+               $runcase->run_id = $this->record->id;
+               $runcase->case_id = $case->id;
+               $runcase->save();
+           }
+
         }
     }
 }

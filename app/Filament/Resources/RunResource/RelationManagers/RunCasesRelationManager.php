@@ -14,13 +14,14 @@ class RunCasesRelationManager extends RelationManager
 {
     protected static string $relationship = 'runCases';
 
-    protected static ?string $recordTitleAttribute = 'run_id';
+    protected static ?string $recordTitleAttribute = 'case_name';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('run_id')
+                Forms\Components\TextInput::make('testCase.case_name')
+                    ->label('Test Cases')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -30,21 +31,22 @@ class RunCasesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('run_id'),
+                Tables\Columns\TextColumn::make('testCase.case_name')
+                    ->label('Test Cases'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+//                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+//                Tables\Actions\EditAction::make(),
+//                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+//                Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }
