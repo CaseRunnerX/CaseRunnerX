@@ -8,6 +8,7 @@ use App\Models\Milestone;
 use App\Models\Run;
 use App\Models\Suites;
 use Filament\Forms;
+use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -30,11 +31,13 @@ class RunResource extends Resource
                     Forms\Components\DatePicker::make('test_run_date'),
                     Forms\Components\TextInput::make('test_run_name')
                         ->required()
+                        ->disabledOn('edit')
                         ->maxLength(255),
                     TinyEditor::make('references')
                         ->required(),
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
+                        ->disabledOn('edit')
                         ->options(Milestone::all()->pluck('milestone_name', 'id'))
                         ->reactive()
                         ->required(),
@@ -45,6 +48,7 @@ class RunResource extends Resource
                     Forms\Components\Select::make('test_suite_id')
                         ->label('Test Suite')
                         ->multiple()
+                        ->disabledOn('edit')
                         ->options(fn(\Closure $get) => Suites::all()->where('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
                         ->required(),
                     Forms\Components\Select::make('status')
@@ -75,21 +79,8 @@ class RunResource extends Resource
                 Tables\Columns\TextColumn::make('test_run_date')
                     ->date(),
                 Tables\Columns\TextColumn::make('test_run_name'),
-                Tables\Columns\TextColumn::make('references'),
-                Tables\Columns\TextColumn::make('milestone_id'),
-                Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('assigned_qa'),
-                Tables\Columns\TextColumn::make('test_suite_id'),
                 Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_by'),
-                Tables\Columns\TextColumn::make('updated_by'),
-                Tables\Columns\TextColumn::make('deleted_by'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -97,6 +88,7 @@ class RunResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
