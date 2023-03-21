@@ -157,7 +157,9 @@ class ProjectsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+           RelationManagers\MilestoneRelationManager::class,
+           RelationManagers\SuitesRelationManager::class,
+           RelationManagers\CasesRelationManager::class
         ];
     }
 

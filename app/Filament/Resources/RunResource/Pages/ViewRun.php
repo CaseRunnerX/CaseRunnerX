@@ -29,4 +29,9 @@ class ViewRun extends ViewRecord
         $data['deleted_by'] = $this->record->destroyer->name ?? null;
         return $data;
     }
+
+    public function hasCombinedRelationManagerTabsWithForm(): bool
+    {
+        return true;
+    }
 }

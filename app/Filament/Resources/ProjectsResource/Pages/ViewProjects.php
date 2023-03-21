@@ -31,4 +31,9 @@ class ViewProjects extends ViewRecord
         return $data;
     }
 
+    public function hasCombinedRelationManagerTabsWithForm(): bool
+    {
+        return true;
+    }
+
 }

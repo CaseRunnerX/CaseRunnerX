@@ -17,13 +17,6 @@ return new class extends Migration {
             $table->foreignId('assigned_qa')->nullable();
             $table->foreignId('test_suite_id');
             $table->string('status');
-            $table->longText('actual_result');
-            $table->longText('defect')->nullable();
-            $table->longText('failure')->nullable();
-            $table->longText('effect')->nullable();
-            $table->longText('root_cause')->nullable();
-            $table->string('issue_id')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('created_by')->nullable();
