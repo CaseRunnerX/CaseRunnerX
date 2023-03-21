@@ -27,7 +27,7 @@ class SuitesRelationManager extends RelationManager
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
-                        ->options(Milestone::all()->pluck('milestone_name', 'id'))
+                        ->options(fn(RelationManager $livewire) => Milestone::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('milestone_name', 'id'))
                         ->required(),
                     Forms\Components\TextInput::make('suite_name')
                         ->required()
