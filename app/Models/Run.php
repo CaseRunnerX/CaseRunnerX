@@ -33,4 +33,11 @@ class Run extends Model
     {
         return $this->hasMany(RunCase::class, 'run_id', 'id');
     }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($run) {
+            $run->runCases()->delete();
+        });
+    }
 }

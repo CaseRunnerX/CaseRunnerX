@@ -33,6 +33,8 @@ class RunCasesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('testCase.case_name')
                     ->label('Test Cases'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status'),
             ])
             ->filters([
                 //
