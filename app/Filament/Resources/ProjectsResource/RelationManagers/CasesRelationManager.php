@@ -30,7 +30,7 @@ class CasesRelationManager extends RelationManager
                         ->visibleOn('view')
                         ->disabled(),
                     Forms\Components\Select::make('suite_id')
-                        ->options(Suites::all()->pluck('suite_name', 'id'))
+                        ->options(fn(RelationManager $livewire) => Suites::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('suite_name', 'id'))
                         ->label('Test Suite Name'),
                     Forms\Components\TextInput::make('case_name')
                         ->required()

@@ -17,6 +17,7 @@ class Suites extends Model
         'milestone_id',
         'suite_name',
         'suite_number',
+        'test_plan_id',
         'description',
         'created_by',
         'updated_by',
