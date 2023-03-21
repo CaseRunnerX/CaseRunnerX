@@ -11,7 +11,7 @@ class RunCase extends Model
 
     protected $fillable = [
       'run_id',
-      'run_id',
+      'case_id',
       'status',
       'status',
       'status',
