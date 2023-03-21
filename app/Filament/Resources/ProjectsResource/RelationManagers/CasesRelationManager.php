@@ -74,7 +74,8 @@ class CasesRelationManager extends RelationManager
                             ->required()
                             ->integer(),
                         TinyEditor::make('Steps description')
-                    ]),
+                    ])
+                        ->createItemButtonLabel('Add step'),
                     TinyEditor::make('expected_result')
                         ->required(),
                     Forms\Components\Card::make()->schema([
@@ -104,12 +105,8 @@ class CasesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('case_number'),
                 Tables\Columns\TextColumn::make('case_name'),
-                Tables\Columns\TextColumn::make('prerequisite'),
                 Tables\Columns\TextColumn::make('priority'),
                 Tables\Columns\TextColumn::make('case_type'),
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('steps'),
-                Tables\Columns\TextColumn::make('expected_result'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make()

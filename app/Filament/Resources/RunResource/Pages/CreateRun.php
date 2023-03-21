@@ -9,4 +9,14 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateRun extends CreateRecord
 {
     protected static string $resource = RunResource::class;
+
+    protected function afterCreate(): void
+    {
+        $this->associateTestCaseRecord();
+    }
+
+    public function associateTestCaseRecord()
+    {
+        ddd($this->record);
+    }
 }

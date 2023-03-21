@@ -108,7 +108,7 @@ class RunResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RunCasesRelationManager::class
         ];
     }
 
