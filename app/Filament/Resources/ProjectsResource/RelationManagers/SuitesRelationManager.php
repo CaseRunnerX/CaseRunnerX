@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
-use App\Filament\Resources\SuitesResource\Pages;
-use App\Filament\Resources\SuitesResource\RelationManagers;
 use App\Models\Milestone;
-use App\Models\Suites;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Contracts\HasRelationshipTable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SuitesResource extends Resource
+class SuitesRelationManager extends RelationManager
 {
-    protected static ?string $model = Suites::class;
+    protected static string $relationship = 'suites';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
-    protected static bool $shouldRegisterNavigation = false;
-
+    protected static ?string $recordTitleAttribute = 'suite_name';
 
     public static function form(Form $form): Form
     {
@@ -49,8 +46,6 @@ class SuitesResource extends Resource
                 ])
                     ->visibleOn('view')
                     ->columns(2)
-
-
             ]);
     }
 
@@ -64,39 +59,39 @@ class SuitesResource extends Resource
                 Tables\Columns\TextColumn::make('description'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TrashedFilter::make()
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->using(function (HasRelationshipTable $livewire, array $data): Model {
+                        return $livewire->getRelationship()->create($data);
+                    }),
+                Tables\Actions\AssociateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->mutateRecordDataUsing(function (array $data): array {
+                        $data['created_by'] = User::find($data['created_by'])?->name ?? null;
+                        $data['updated_by'] = User::find($data['updated_by'])?->name ?? null;
+                        return $data;
+                    }),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DissociateAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
+                Tables\Actions\DissociateBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\ForceDeleteBulkAction::make(),
             ]);
     }
 
-    public static function getRelations(): array
+    protected function getTableQuery(): Builder
     {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListSuites::route('/'),
-            'create' => Pages\CreateSuites::route('/create'),
-            'view' => Pages\ViewSuites::route('/{record}'),
-            'edit' => Pages\EditSuites::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
+        return parent::getTableQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

@@ -24,7 +24,12 @@ class Milestone extends Model
     ];
 
 
-    public function test_plan(): BelongsTo
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Projects::class, 'test_plan_id', 'id');
+    }
+
+    public function projects(): BelongsTo
     {
         return $this->belongsTo(Projects::class, 'test_plan_id', 'id');
     }
