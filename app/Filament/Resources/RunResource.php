@@ -37,6 +37,7 @@ class RunResource extends Resource
                         ->required(),
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
+                        ->multiple()
                         ->disabledOn('edit')
                         ->options(Milestone::all()->pluck('milestone_name', 'id'))
                         ->reactive()
@@ -49,7 +50,7 @@ class RunResource extends Resource
                         ->label('Test Suite')
                         ->multiple()
                         ->disabledOn('edit')
-                        ->options(fn(\Closure $get) => Suites::all()->where('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
+                        ->options(fn(\Closure $get) => Suites::all()->whereIn('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
                         ->required(),
                     Forms\Components\Select::make('status')
                         ->options([
