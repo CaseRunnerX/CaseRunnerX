@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\HealthServiceProvider::class,
+        App\Providers\CustNavigationServiceProvider::class,
     ],
 
     /*
