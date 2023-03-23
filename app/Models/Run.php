@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
@@ -19,6 +20,7 @@ class Run extends Model
         'description',
         'assigned_qa',
         'test_suite_id',
+        'project_id',
         'status',
         'created_by',
         'updated_by',
@@ -32,6 +34,11 @@ class Run extends Model
     public function runCases(): HasMany
     {
         return $this->hasMany(RunCase::class, 'run_id', 'id');
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Projects::class, 'project_id', 'id');
     }
 
     public static function boot() {
