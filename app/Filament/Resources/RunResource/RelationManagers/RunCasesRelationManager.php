@@ -12,6 +12,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
@@ -109,6 +110,10 @@ class RunCasesRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['case_id'] = Cases::find($data['case_id'])?->case_name ?? null;
+                        return $data;
+                    })
+                    ->mutateFormDataUsing(function (array $data, Model $record): array {
+                        $data['case_id'] =  $record->case_id;
                         return $data;
                     }),
 //                Tables\Actions\DeleteAction::make(),
