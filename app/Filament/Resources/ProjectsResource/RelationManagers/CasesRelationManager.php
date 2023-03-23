@@ -73,9 +73,11 @@ class CasesRelationManager extends RelationManager
                     Forms\Components\Repeater::make('steps')->schema([
                         Forms\Components\TextInput::make('Step count')
                             ->required()
-                            ->integer(),
+                            ->numeric(),
                         TinyEditor::make('Steps description')
+                            ->required()
                     ])
+                        ->required()
                         ->createItemButtonLabel('Add step'),
                     TinyEditor::make('expected_result')
                         ->required(),
