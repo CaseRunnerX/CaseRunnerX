@@ -21,7 +21,7 @@ class RunResource extends Resource
 {
     protected static ?string $model = Run::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-beaker';
 
     public static function form(Form $form): Form
     {
