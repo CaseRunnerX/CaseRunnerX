@@ -28,7 +28,8 @@ class Run extends Model
     ];
 
     protected $casts = [
-        'test_suite_id' => 'array'
+        'test_suite_id' => 'array',
+        'milestone_id' => 'array'
     ];
 
     public function runCases(): HasMany
