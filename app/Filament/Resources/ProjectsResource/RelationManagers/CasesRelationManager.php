@@ -37,11 +37,12 @@ class CasesRelationManager extends RelationManager
                         ->maxLength(255),
                     TinyEditor::make('prerequisite'),
                     Forms\Components\Select::make('priority')
+                        ->required()
                         ->options([
                             'Low' => 'Low',
                             'Medium' => 'Medium',
                             'High' => 'High'
-                        ]),
+                        ])->default('Low'),
                     Forms\Components\Select::make('status')
                         ->options([
                             'Passed' => 'Passed',
