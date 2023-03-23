@@ -104,6 +104,8 @@ class CasesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('case_number'),
+                Tables\Columns\TextColumn::make('suite.suite_name')
+                    ->label('Suites Name'),
                 Tables\Columns\TextColumn::make('case_name'),
                 Tables\Columns\TextColumn::make('priority'),
                 Tables\Columns\TextColumn::make('case_type'),

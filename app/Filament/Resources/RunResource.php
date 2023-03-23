@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RunResource\Pages;
 use App\Filament\Resources\RunResource\RelationManagers;
 use App\Models\Milestone;
+use App\Models\Projects;
 use App\Models\Run;
 use App\Models\Suites;
 use Filament\Forms;
@@ -21,7 +22,7 @@ class RunResource extends Resource
 {
     protected static ?string $model = Run::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-beaker';
 
     public static function form(Form $form): Form
     {
@@ -35,11 +36,17 @@ class RunResource extends Resource
                         ->maxLength(255),
                     TinyEditor::make('references')
                         ->required(),
+                    Forms\Components\Select::make('project_id')
+                        ->label('Project')
+                        ->disabledOn('edit')
+                        ->options(Projects::all()->pluck('project_name', 'id'))
+                        ->reactive()
+                        ->required(),
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
                         ->multiple()
                         ->disabledOn('edit')
-                        ->options(Milestone::all()->pluck('milestone_name', 'id'))
+                        ->options(fn(\Closure $get) => Milestone::all()->where('test_plan_id', $get('project_id'))->pluck('milestone_name', 'id'))
                         ->reactive()
                         ->required(),
                     Forms\Components\Textarea::make('description')
