@@ -17,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Carbon;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class RunResource extends Resource
@@ -31,18 +32,32 @@ class RunResource extends Resource
             ->schema([
                 Forms\Components\Card::make()->schema([
                     Forms\Components\DatePicker::make('test_run_date')
-                        ->default(now()),
-                    Forms\Components\TextInput::make('test_run_name')
-                        ->required()
                         ->disabledOn('edit')
-                        ->maxLength(255),
-                    TinyEditor::make('references')
-                        ->required(),
+                        ->format('d/m/Y')
+                        ->withoutTime()
+                        ->reactive()
+                        ->default(now()->toDateString()),
                     Forms\Components\Select::make('project_id')
                         ->label('Project')
                         ->disabledOn('edit')
                         ->options(Projects::all()->pluck('project_name', 'id'))
                         ->reactive()
+                        ->afterStateHydrated(function(\Closure $get, \Closure $set, $state){
+                            $date = $get('test_run_date');
+                            $formatted = $date.' - '.$state;
+                            $set('test_run_name', $formatted);
+                        })
+                        ->afterStateUpdated(function(\Closure $get, \Closure $set, $state){
+                            $date =Carbon::parse($get('test_run_date'))->toDateString();
+                            $formatted = $date.' - '.Projects::find($state)->project_name;
+                            $set('test_run_name', $formatted);
+                        })
+                        ->required(),
+                    Forms\Components\TextInput::make('test_run_name')
+                        ->required()
+                        ->disabledOn('edit')
+                        ->maxLength(255),
+                    TinyEditor::make('references')
                         ->required(),
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
