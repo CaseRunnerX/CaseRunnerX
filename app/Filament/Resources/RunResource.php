@@ -8,6 +8,7 @@ use App\Models\Milestone;
 use App\Models\Projects;
 use App\Models\Run;
 use App\Models\Suites;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Form;
@@ -51,7 +52,9 @@ class RunResource extends Resource
                         ->required(),
                     Forms\Components\Textarea::make('description')
                         ->required(),
-                    Forms\Components\TextInput::make('assigned_qa')
+                    Forms\Components\Select::make('assigned_qa')
+                        ->options(User::all()->pluck('name', 'id'))
+                        ->default(auth()->id())
                         ->label('Assigned QA'),
                     Forms\Components\Select::make('test_suite_id')
                         ->label('Test Suite')
