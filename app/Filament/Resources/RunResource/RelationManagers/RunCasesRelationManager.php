@@ -12,6 +12,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
@@ -69,6 +70,8 @@ class RunCasesRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('testCase.case_number')
+                    ->label('Test Cases Number'),
                 Tables\Columns\TextColumn::make('testCase.case_name')
                     ->label('Test Cases'),
                 BadgeableColumn::make('status')
@@ -119,7 +122,30 @@ class RunCasesRelationManager extends RelationManager
 //                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-//                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkAction::make('UpdateStatus')
+                ->label('Mass Update Status')
+                    ->action(function (Collection $records, array $data): void {
+                        foreach ($records as $record) {
+                            $record->status = $data['status_update'];
+                            $record->save();
+                        }
+                    })
+                    ->form([
+                        Forms\Components\Select::make('status_update')
+                            ->label('Status')
+                            ->options([
+                                'Untested' => 'Untested',
+                                'Passed' => 'Passed',
+                                'Retest' => 'Retest',
+                                'Blocked' => 'Blocked',
+                                'Skipped' => 'Skipped',
+                                'To Be Determined' => 'To Be Determined'
+                            ])
+                            ->reactive()
+                            ->default('Untested')
+                            ->required(),
+                    ])
+                    ->deselectRecordsAfterCompletion()
             ]);
     }
 }

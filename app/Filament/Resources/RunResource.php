@@ -8,6 +8,7 @@ use App\Models\Milestone;
 use App\Models\Projects;
 use App\Models\Run;
 use App\Models\Suites;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Form;
@@ -16,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Carbon;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class RunResource extends Resource
@@ -29,45 +31,62 @@ class RunResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Card::make()->schema([
-                    Forms\Components\DatePicker::make('test_run_date'),
-                    Forms\Components\TextInput::make('test_run_name')
-                        ->required()
-                        ->disabledOn('edit')
-                        ->maxLength(255),
-                    TinyEditor::make('references')
-                        ->required(),
-                    Forms\Components\Select::make('project_id')
-                        ->label('Project')
-                        ->disabledOn('edit')
-                        ->options(Projects::all()->pluck('project_name', 'id'))
-                        ->reactive()
-                        ->required(),
-                    Forms\Components\Select::make('milestone_id')
-                        ->label('Milestone')
-                        ->multiple()
-                        ->disabledOn('edit')
-                        ->options(fn(\Closure $get) => Milestone::all()->where('test_plan_id', $get('project_id'))->pluck('milestone_name', 'id'))
-                        ->reactive()
-                        ->required(),
+                    Forms\Components\Card::make()->schema([
+                        Forms\Components\TextInput::make('test_run_name')
+                            ->required()
+                            ->disabledOn('edit')
+                            ->maxLength(255),
+                        Forms\Components\DatePicker::make('test_run_date')
+                            ->disabledOn('edit')
+                            ->format('d/m/Y')
+                            ->withoutTime()
+                            ->reactive()
+                            ->default(now()->toDateString()),
+                        Forms\Components\Select::make('project_id')
+                            ->label('Project')
+                            ->disabledOn('edit')
+                            ->options(Projects::all()->pluck('project_name', 'id'))
+                            ->reactive()
+                            ->afterStateHydrated(function(\Closure $get, \Closure $set, $state){
+                                $date = $get('test_run_date');
+                                $formatted = $date.' - '.Projects::find($state)->project_name;
+                                $set('test_run_name', $formatted);
+                            })
+                            ->afterStateUpdated(function(\Closure $get, \Closure $set, $state){
+                                $date =Carbon::parse($get('test_run_date'))->toDateString();
+                                $formatted = $date.' - '.Projects::find($state)->project_name;
+                                $set('test_run_name', $formatted);
+                            })
+                            ->required(),
+                        Forms\Components\Select::make('milestone_id')
+                            ->label('Milestone')
+                            ->multiple()
+                            ->disabledOn('edit')
+                            ->options(fn(\Closure $get) => Milestone::all()->where('test_plan_id', $get('project_id'))->pluck('milestone_name', 'id'))
+                            ->reactive()
+                            ->required(),
+                        Forms\Components\Select::make('test_suite_id')
+                            ->label('Test Suite')
+                            ->multiple()
+                            ->disabledOn('edit')
+                            ->options(fn(\Closure $get) => Suites::all()->whereIn('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
+                            ->required(),
+                        Forms\Components\Select::make('status')
+                            ->options([
+                                'Active' => 'Active',
+                                'Non-Active' => 'Non-Active',
+                                'Idle' => 'Idle',
+                            ])
+                            ->default('Active')
+                            ->required(),
+                        Forms\Components\Select::make('assigned_qa')
+                            ->options(User::all()->pluck('name', 'id'))
+                            ->default(auth()->id())
+                            ->label('Assigned QA'),
+                        Forms\Components\TextInput::make('references')
+                            ->required(),
+                    ])->columns(2),
                     Forms\Components\Textarea::make('description')
-                        ->required(),
-                    Forms\Components\TextInput::make('assigned_qa')
-                        ->label('Assigned QA'),
-                    Forms\Components\Select::make('test_suite_id')
-                        ->label('Test Suite')
-                        ->multiple()
-                        ->disabledOn('edit')
-                        ->options(fn(\Closure $get) => Suites::all()->whereIn('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
-                        ->required(),
-                    Forms\Components\Select::make('status')
-                        ->options([
-                            'Passed' => 'Passed',
-                            'Failed' => 'Failed',
-                            'Blocked' => 'Blocked',
-                            'Skipped' => 'Skipped',
-                            'To be Tested' => 'To be Tested'
-                        ])
-                        ->default('To be Tested')
                         ->required(),
                 ]),
                 Forms\Components\Card::make()->schema([
@@ -75,6 +94,7 @@ class RunResource extends Resource
                     Forms\Components\TextInput::make('updated_by'),
                     Forms\Components\TextInput::make('deleted_by'),
                 ])
+                    ->columns(2)
                     ->visibleOn('view')
                     ->disabled()
             ]);
