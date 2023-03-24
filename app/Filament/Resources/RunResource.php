@@ -57,7 +57,7 @@ class RunResource extends Resource
                         ->required()
                         ->disabledOn('edit')
                         ->maxLength(255),
-                    TinyEditor::make('references')
+                    Forms\Components\TextInput::make('references')
                         ->required(),
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
