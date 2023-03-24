@@ -69,6 +69,8 @@ class RunCasesRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('testCase.case_number')
+                    ->label('Test Cases Number'),
                 Tables\Columns\TextColumn::make('testCase.case_name')
                     ->label('Test Cases'),
                 BadgeableColumn::make('status')
