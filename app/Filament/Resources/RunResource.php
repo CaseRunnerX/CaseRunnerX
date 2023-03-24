@@ -30,7 +30,8 @@ class RunResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Card::make()->schema([
-                    Forms\Components\DatePicker::make('test_run_date'),
+                    Forms\Components\DatePicker::make('test_run_date')
+                        ->default(now()),
                     Forms\Components\TextInput::make('test_run_name')
                         ->required()
                         ->disabledOn('edit')
