@@ -64,13 +64,11 @@ class RunResource extends Resource
                         ->required(),
                     Forms\Components\Select::make('status')
                         ->options([
-                            'Passed' => 'Passed',
-                            'Failed' => 'Failed',
-                            'Blocked' => 'Blocked',
-                            'Skipped' => 'Skipped',
-                            'To be Tested' => 'To be Tested'
+                            'Active' => 'Active',
+                            'Non-Active' => 'Non-Active',
+                            'Idle' => 'Idle',
                         ])
-                        ->default('To be Tested')
+                        ->default('Active')
                         ->required(),
                 ]),
                 Forms\Components\Card::make()->schema([
