@@ -121,7 +121,6 @@ class CasesRelationManager extends RelationManager
                     ->using(function (HasRelationshipTable $livewire, array $data): Model {
                         return $livewire->getRelationship()->create($data);
                     }),
-                Tables\Actions\AssociateAction::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -131,13 +130,11 @@ class CasesRelationManager extends RelationManager
                         return $data;
                     }),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DissociateAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DissociateBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
