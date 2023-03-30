@@ -47,8 +47,8 @@ class RunCasesRelationManager extends RelationManager
                     ->reactive()
                     ->default('Untested')
                     ->required(),
-                TinyEditor::make('actual_result'),
                 Forms\Components\Card::make()->schema([
+                    TinyEditor::make('actual_result'),
                     TinyEditor::make('defect')
                         ->required(),
                     TinyEditor::make('failure')

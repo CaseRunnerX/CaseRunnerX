@@ -81,17 +81,6 @@ class CasesRelationManager extends RelationManager
                         ->createItemButtonLabel('Add step'),
                     TinyEditor::make('expected_result')
                         ->required(),
-                    Forms\Components\Card::make()->schema([
-                        TinyEditor::make('actual_result')
-                            ->required(),
-                        TinyEditor::make('defect'),
-                        TinyEditor::make('failure'),
-                        TinyEditor::make('effect'),
-                        TinyEditor::make('root_cause'),
-                        Forms\Components\TextInput::make('issue_id')
-                            ->label('Issue ID')
-                            ->maxLength(255),
-                    ])->visibleOn(['view', 'edit']),
 
                 ])->columns(1),
                 Forms\Components\Card::make()->schema([
