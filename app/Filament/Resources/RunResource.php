@@ -49,12 +49,12 @@ class RunResource extends Resource
                             ->reactive()
                             ->afterStateHydrated(function(\Closure $get, \Closure $set, $state){
                                 $date = $get('test_run_date');
-                                $formatted = $date.' - '.Projects::find($state)->project_name;
+                                $formatted = $date.' - '.Projects::find($state)?->project_name;
                                 $set('test_run_name', $formatted);
                             })
                             ->afterStateUpdated(function(\Closure $get, \Closure $set, $state){
                                 $date =Carbon::parse($get('test_run_date'))->toDateString();
-                                $formatted = $date.' - '.Projects::find($state)->project_name;
+                                $formatted = $date.' - '.Projects::find($state)?->project_name;
                                 $set('test_run_name', $formatted);
                             })
                             ->required(),
