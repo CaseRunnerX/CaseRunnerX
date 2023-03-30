@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class MilestoneRelationManager extends RelationManager
 {
     protected static string $relationship = 'milestone';
-
+    protected static ?string $title = "Project Milestone";
     protected static ?string $recordTitleAttribute = 'milestone_name';
 
     public static function form(Form $form): Form

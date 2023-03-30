@@ -18,7 +18,7 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class CasesRelationManager extends RelationManager
 {
     protected static string $relationship = 'cases';
-
+    protected static ?string $title = "Test Cases";
     protected static ?string $recordTitleAttribute = 'test_plan_id';
 
     public static function form(Form $form): Form
