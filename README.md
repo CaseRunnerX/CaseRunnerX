@@ -19,7 +19,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Prerequisite
 
-Enable this additionals php extension:
+Enable this additional php extension:
 ```
 1. sqlite
 
@@ -34,45 +34,24 @@ composer install
 Step 2.
 > Copy the .env.example to ".env" and update the database credential
 
-Step 3. add the vendor required by running this command
-```bash
-php artisan generate:key
-```
-Step 4. migrate the database tables
-```bash
-php artisan migrate
-```
-Step 5. generate roles and permissions
-```bash
-php artisan shield:generate --all
-```
-Step 6. and generate Super-Admin account
-```bash
-php artisan make:filament-user
-```
-Step 7.
-```bash
-php artisan shield:super-admin --user=1
-```
-
-Step 8.
-```bash
-php artisan storage:link
-```
-
-Step 9. install npm dependency
+Step 3. install npm dependency
 
 ```bash
 npm install
 ```
 
-Step 10. Build the front end
+Step 4. Build the front end
 
 ```bash
 npm run build
 ```
 
-Step 9. once done you can now navigate to the system
+Step 5. run the command to initialize the system
+```bash
+php artisan system:initialize
+```
+
+Step 6. once done you can now navigate to the system
 
 ```link
 http://127.0.0.1:8000/ 
