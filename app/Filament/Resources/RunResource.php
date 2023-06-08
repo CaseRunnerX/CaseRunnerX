@@ -38,7 +38,6 @@ class RunResource extends Resource
                             ->maxLength(255),
                         Forms\Components\DatePicker::make('test_run_date')
                             ->disabledOn('edit')
-                            ->format('d/m/Y')
                             ->withoutTime()
                             ->reactive()
                             ->default(now()->toDateString()),
