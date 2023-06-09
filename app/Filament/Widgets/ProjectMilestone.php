@@ -41,7 +41,7 @@ class ProjectMilestone extends ApexChartWidget
         }
 
         // Fetch test case run
-        $projectData = Projects::find($this->record->id)->has('runs.runCases')->get();
+        $projectData = Projects::whereId($this->record->id)->has('runs.runCases')->get();
 
 
 
