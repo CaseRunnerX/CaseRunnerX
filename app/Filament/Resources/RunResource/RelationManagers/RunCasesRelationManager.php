@@ -87,10 +87,10 @@ class RunCasesRelationManager extends RelationManager
                                 'To Be Determined' => 'To Be Determined'
                             ])
                             ->colors([
-                                '#fff' => 'Untested',
+                                '#FDE047' => 'Untested',
                                 '#16A34A' => 'Passed',
                                 '#DC2626' => 'Failed',
-                                '#DB2777' => 'Retest',
+                                '#F472B6' => 'Retest',
                                 '#52525B' => 'Blocked',
                                 '#CA8A04' => 'Skipped',
                                 '#7C3AED' => 'To Be Determined'

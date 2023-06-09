@@ -17,6 +17,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "leandrocfe/filament-apex-charts": "^1.0",
         "marjose123/filament-lockscreen": "^1.1",
         "marjose123/filament-no-connection": "^1.0",
         "mohamedsabil83/filament-forms-tinyeditor": "^1.7",
@@ -28,6 +29,7 @@
     "require-dev": {
         "doctrine/dbal": "^3.6",
         "fakerphp/faker": "^1.9.1",
+        "laradumps/laradumps": "^1.12",
         "laravel/pint": "^1.6",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",

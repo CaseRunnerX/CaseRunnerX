@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
+use App\Filament\Widgets\ProjectsWidget;
 use App\Models\User;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -31,9 +32,19 @@ class ViewProjects extends ViewRecord
         return $data;
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ProjectsWidget::class,
+
+        ];
+    }
+
+
     public function hasCombinedRelationManagerTabsWithForm(): bool
     {
         return true;
     }
+
 
 }
