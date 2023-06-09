@@ -35,6 +35,8 @@ class ProjectsWidget extends ApexChartWidget
 
     public ?Model $record = null;
 
+    protected static ?string $pollingInterval = null;
+
     protected function getOptions(): array
     {
         //showing a loading indicator immediately after the page load
