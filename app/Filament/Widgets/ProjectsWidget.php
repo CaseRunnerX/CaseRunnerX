@@ -43,7 +43,9 @@ class ProjectsWidget extends ApexChartWidget
         }
 
         // Fetch test case run
-        $projectData = Projects::find($this->record->id)->has('runs.runCases')->get();
+//        ddd($this->record->id);
+        $projectData = Projects::whereId($this->record->id)->with('runs.runCases')->get();
+//        ddd($projectData);
         foreach ($projectData as $project)
         {
             foreach ($project->runs as $run)
@@ -86,9 +88,9 @@ class ProjectsWidget extends ApexChartWidget
                 'type' => 'pie',
                 'height' => 300,
             ],
-            'series' => [$this->Untested, $this->Passed, $this->Failed, $this->Retest, $this->Blocked, $this->Skipped, $this->tbd, $this->ntc],
-            'labels' => ['Untested', 'Passed', 'Failed', 'Retest', 'Blocked', 'Skipped', 'To Be Determined', 'No Test Case'],
-            'colors' => ['#FDE047', '#16A34A', '#DC2626', '#F472B6', '#52525B', '#CA8A04', '#7C3AED', '#64748B',],
+            'series' => [$this->Untested, $this->Passed, $this->Failed, $this->Retest, $this->Blocked, $this->Skipped, $this->tbd],
+            'labels' => ['Untested', 'Passed', 'Failed', 'Retest', 'Blocked', 'Skipped', 'To Be Determined'],
+            'colors' => ['#FDE047', '#16A34A', '#DC2626', '#F472B6', '#52525B', '#CA8A04', '#7C3AED'],
             'legend' => [
                 'labels' => [
                     'colors' => '#9ca3af',

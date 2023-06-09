@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
+use App\Filament\Widgets\ProjectMilestone;
 use App\Filament\Widgets\ProjectsWidget;
 use App\Models\User;
 use Filament\Pages\Actions;
@@ -36,6 +37,7 @@ class ViewProjects extends ViewRecord
     {
         return [
             ProjectsWidget::class,
+            ProjectMilestone::class,
 
         ];
     }
