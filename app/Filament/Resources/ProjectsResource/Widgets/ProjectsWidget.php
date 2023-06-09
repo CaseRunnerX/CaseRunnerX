@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\ProjectsResource\Widgets;
 
 use App\Models\Projects;
 use Illuminate\Database\Eloquent\Model;

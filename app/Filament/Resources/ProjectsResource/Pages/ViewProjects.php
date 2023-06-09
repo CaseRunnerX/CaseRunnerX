@@ -3,9 +3,8 @@
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
-use App\Filament\Widgets\ProjectMilestone;
-use App\Filament\Widgets\ProjectsWidget;
-use App\Models\User;
+use App\Filament\Resources\ProjectsResource\Widgets\ProjectMilestone;
+use App\Filament\Resources\ProjectsResource\Widgets\ProjectsWidget;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
