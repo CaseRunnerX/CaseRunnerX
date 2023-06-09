@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\ProjectsResource\Widgets;
 
 use App\Models\Projects;
+use App\Models\Run;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class ProjectMilestone extends ApexChartWidget
@@ -33,17 +35,30 @@ class ProjectMilestone extends ApexChartWidget
 
     public ?Model $record = null;
 
+    protected static ?string $pollingInterval = null;
+
+
+    public ?array $milestoneCounter = [];
+
     protected function getOptions(): array
     {
+
         //showing a loading indicator immediately after the page load
         if (!$this->readyToLoad) {
             return [];
         }
 
         // Fetch test case run
-        $projectData = Projects::whereId($this->record->id)->has('runs.runCases')->get();
-
-
+        $projectData = Projects::whereId($this->record->id)->with('milestone')->get();
+        foreach ($projectData as $project)
+        {
+            foreach ($project->milestone as $milestone)
+            {
+                $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
+                $this->milestoneCounter['milestone_name'][] = $milestone->milestone_name;
+                $this->milestoneCounter['milestone_count'][] = $runcase->count();
+            }
+        }
 
         return [
             'chart' => [
@@ -53,11 +68,11 @@ class ProjectMilestone extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Number of Test Case',
-                    'data' => [7, 4, 6, 10, 14, 7, 5, 9, 10, 15, 13, 18],
+                    'data' => $this->milestoneCounter['milestone_count'],
                 ],
             ],
             'xaxis' => [
-                'categories' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'categories' => $this->milestoneCounter['milestone_name'],
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',
