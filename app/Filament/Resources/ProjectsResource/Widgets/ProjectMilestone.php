@@ -67,7 +67,7 @@ class ProjectMilestone extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'Number of Test Case',
+                    'name' => 'Total Number of Test Cases',
                     'data' => $this->milestoneCounter['milestone_count'],
                 ],
             ],
