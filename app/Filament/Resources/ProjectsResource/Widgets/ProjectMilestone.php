@@ -64,19 +64,19 @@ class ProjectMilestone extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Total # of Test Cases',
-                    'data' => $this->milestoneCounter['milestone_count'],
+                    'data' => $this->milestoneCounter['milestone_count'] ?? [],
                 ],
                 [
                     'name' => 'Total # of Test Cases Executed',
-                    'data' => $this->milestoneCounter['executed']
+                    'data' => $this->milestoneCounter['executed'] ?? []
                 ],
                 [
                     'name' => 'Total # of Test Cases Untested',
-                    'data' => $this->milestoneCounter['untested']
+                    'data' => $this->milestoneCounter['untested'] ?? []
                 ],
             ],
             'xaxis' => [
-                'categories' => $this->milestoneCounter['milestone_name'],
+                'categories' => $this->milestoneCounter['milestone_name'] ?? [],
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',
@@ -135,7 +135,7 @@ class ProjectMilestone extends ApexChartWidget
             {
                 $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
                 $this->milestoneCounter['milestone_name'][] = Str::title($milestone->milestone_name);
-                $this->milestoneCounter['milestone_count'][] = $runcase->count();
+                $this->milestoneCounter['milestone_count'][] = $runcase->count() ?? 0;
                 $testRunCasesUntested = 0;
                 $testRunCasesExecuted = 0;
                 foreach ($runcase as $runCaseData)
