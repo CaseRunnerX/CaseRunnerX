@@ -32,17 +32,20 @@ class ProjectsResource extends Resource
                     Forms\Components\Select::make('application')
                         ->label('Application')
                         ->required()
-                        ->options([
+                        ->disablePlaceholderSelection()
+                        ->options(config('tcms.applications',[
                             'Zoho' => 'Zoho',
-                            'SugarCRM' => 'SugarCRM',
-                            'SuiteCRM' => 'SuiteCRM'
-                        ]),
+                            'SugarCRM' => 'Sugar CRM',
+                            'SuiteCRM' => 'Suite CRM',
+                            'Laravel' => 'Laravel'
+                        ])),
                     Forms\Components\Select::make('project_type')
                         ->label('Project Type')
-                        ->options([
+                        ->options(config('tcms.project_type', [
                             'Fix Bid' => 'Fix Bid',
                             'Premium Support' => 'Premium Support',
-                        ])
+                        ]))
+                        ->disablePlaceholderSelection()
                         ->required(),
                     Forms\Components\TextInput::make('assigned_project_manager')
                         ->label('Assigned Project Manager')
