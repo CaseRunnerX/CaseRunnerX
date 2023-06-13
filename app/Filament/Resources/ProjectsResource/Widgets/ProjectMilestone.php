@@ -49,18 +49,75 @@ class ProjectMilestone extends ApexChartWidget
         }
 
         // Fetch test case run
-        $projectData = Projects::whereId($this->record->id)->with('milestone')->get();
-        foreach ($projectData as $project)
-        {
-            foreach ($project->milestone as $milestone)
-            {
-                $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
-                $this->milestoneCounter['milestone_name'][] = $milestone->milestone_name;
-                $this->milestoneCounter['milestone_count'][] = $runcase->count();
-            }
-        }
+        $this->fetchData();
+
 
         return [
+            'chart' => [
+                'type' => 'bar',
+                'height' => 300,
+            ],
+            'series' => [
+                [
+                    'name' => 'Total Number of Test Cases',
+                    'data' => $this->milestoneCounter['milestone_count'],
+                ],
+                [
+                    'name' => 'Net Profit',
+                    'data' => [44, 55]
+                ],
+                [
+                    'name' => 'Revenue',
+                    'data' => [76, 85]
+                ],
+            ],
+            'xaxis' => [
+                'categories' => $this->milestoneCounter['milestone_name'],
+                'labels' => [
+                    'style' => [
+                        'colors' => '#9ca3af',
+                        'fontWeight' => 600,
+                    ],
+                ],
+            ],
+            'stroke' => [
+                'show' => true,
+                'width' => 2,
+                'colors' => ['transparent']
+            ],
+            'yaxis' => [
+                'labels' => [
+                    'style' => [
+                        'colors' => '#9ca3af',
+                        'fontWeight' => 600,
+                    ],
+                ],
+            ],
+            'fill' => [
+                'opacity' => 1
+            ],
+            'plotOptions' => [
+                'bar' => [
+                    'horizontal' => false,
+                    'columnWidth' => '55%',
+                    'borderRadius' => 4,
+                    'endingShape'=>  'rounded'
+                ]
+            ],
+            'dataLabels'=> [
+                'enabled' => false
+            ],
+            'legend' => [
+                'show' => true,
+                'position' => 'top',
+                'labels' => [
+                    'colors' => '#9ca3af'
+                ]
+            ]
+        ];
+
+
+       /* return [
             'chart' => [
                 'type' => 'bar',
                 'height' => 300,
@@ -89,6 +146,21 @@ class ProjectMilestone extends ApexChartWidget
                 ],
             ],
             'colors' => ['#6366f1'],
-        ];
+        ];*/
+    }
+
+    public function fetchData()
+    {
+        // Fetch test case run
+        $projectData = Projects::whereId($this->record->id)->with('milestone')->get();
+        foreach ($projectData as $project)
+        {
+            foreach ($project->milestone as $milestone)
+            {
+                $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
+                $this->milestoneCounter['milestone_name'][] = $milestone->milestone_name;
+                $this->milestoneCounter['milestone_count'][] = $runcase->count();
+            }
+        }
     }
 }
