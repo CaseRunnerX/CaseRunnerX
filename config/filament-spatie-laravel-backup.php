@@ -13,7 +13,7 @@ return [
     */
 
     'pages' => [
-        'backups' => \ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups::class,
+        'backups' => \App\Filament\Pages\Backups::class,
     ],
 
     /*
