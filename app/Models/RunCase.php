@@ -14,7 +14,7 @@ class RunCase extends Model
       'case_id',
       'status',
       'actual_result',
-      'defectsss',
+      'defect',
       'failure',
       'effect',
       'root_cause',
