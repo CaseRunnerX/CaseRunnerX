@@ -22,6 +22,15 @@ class ProjectsResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'project_name';
 
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->project_name;
+    }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['project_name', 'author.name', 'account'];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
