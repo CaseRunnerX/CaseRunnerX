@@ -20,6 +20,8 @@ class ProjectsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-archive';
 
+    protected static ?string $recordTitleAttribute = 'project_name';
+
     public static function form(Form $form): Form
     {
         return $form
