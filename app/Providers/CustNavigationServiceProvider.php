@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Filament\Pages\Profile;
 use App\Filament\Resources\ProjectsResource;
 use App\Filament\Resources\RunResource;
 use App\Filament\Resources\UserResource;
@@ -10,6 +11,7 @@ use BezhanSalleh\FilamentShield\Resources\RoleResource;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\UserMenuItem;
 use Filament\Pages\Dashboard;
 use Illuminate\Support\ServiceProvider;
 use ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups;
@@ -24,6 +26,14 @@ class CustNavigationServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Filament::serving(function () {
+            Filament::registerUserMenuItems([
+                UserMenuItem::make()
+                    ->label('My Account')
+                    ->icon('heroicon-o-user-circle')
+                    ->url(\RyanChandler\FilamentProfile\Pages\Profile::getUrl()),
+            ]);
+        });
 
         Filament::navigation(function (NavigationBuilder $builder): NavigationBuilder {
             return $builder->items([

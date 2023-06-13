@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c809a2472d59b2249b73bfbf68becbf",
+    "content-hash": "75ede2cd3e9634c495136d23a0b7fd72",
     "packages": [
         {
             "name": "3x1io/filament-user",
@@ -4956,6 +4956,85 @@
                 }
             ],
             "time": "2023-02-14T16:54:54+00:00"
+        },
+        {
+            "name": "ryangjchandler/filament-profile",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ryangjchandler/filament-profile.git",
+                "reference": "5aaeffc5e5484cc7dbf17a21540a2e07005122e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ryangjchandler/filament-profile/zipball/5aaeffc5e5484cc7dbf17a21540a2e07005122e7",
+                "reference": "5aaeffc5e5484cc7dbf17a21540a2e07005122e7",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0|^7.0",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5|^10.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RyanChandler\\FilamentProfile\\FilamentProfileServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentProfile": "RyanChandler\\FilamentProfile\\Facades\\FilamentProfile"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RyanChandler\\FilamentProfile\\": "src",
+                    "RyanChandler\\FilamentProfile\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chandler",
+                    "email": "support@ryangjchandler.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple profile page for Filament.",
+            "homepage": "https://github.com/ryangjchandler/filament-profile",
+            "keywords": [
+                "filament-profile",
+                "laravel",
+                "ryangjchandler"
+            ],
+            "support": {
+                "issues": "https://github.com/ryangjchandler/filament-profile/issues",
+                "source": "https://github.com/ryangjchandler/filament-profile/tree/v0.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ryangjchandler",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-21T09:58:48+00:00"
         },
         {
             "name": "shuvroroy/filament-spatie-laravel-backup",
