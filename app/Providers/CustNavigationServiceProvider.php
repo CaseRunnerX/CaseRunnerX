@@ -41,12 +41,12 @@ class CustNavigationServiceProvider extends ServiceProvider
             ])->groups([
                 NavigationGroup::make('Settings & Configuration')
                     ->items([
-                        ...UserResource::getNavigationItems(),
                         ...Backups::getNavigationItems(),
                         ...HealthCheckResults::getNavigationItems(),
                     ]),
-                NavigationGroup::make('Roles & Permissions')
+                NavigationGroup::make('Users & Controls')
                     ->items([
+                        ...UserResource::getNavigationItems(),
                         ...RoleResource::getNavigationItems(),
                     ]),
             ]);
