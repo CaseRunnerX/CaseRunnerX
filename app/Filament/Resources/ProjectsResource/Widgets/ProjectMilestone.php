@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ProjectsResource\Widgets;
 
 use App\Models\Projects;
 use App\Models\Run;
+use App\Models\RunCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
@@ -40,8 +41,10 @@ class ProjectMilestone extends ApexChartWidget
 
     public ?array $milestoneCounter = [];
 
+
     protected function getOptions(): array
     {
+
 
         //showing a loading indicator immediately after the page load
         if (!$this->readyToLoad) {
@@ -63,12 +66,12 @@ class ProjectMilestone extends ApexChartWidget
                     'data' => $this->milestoneCounter['milestone_count'],
                 ],
                 [
-                    'name' => 'Net Profit',
-                    'data' => [44, 55]
+                    'name' => 'Total Number of Test Cases Executed',
+                    'data' => $this->milestoneCounter['executed']
                 ],
                 [
-                    'name' => 'Revenue',
-                    'data' => [76, 85]
+                    'name' => 'Total Number of Test Cases Untested',
+                    'data' => $this->milestoneCounter['untested']
                 ],
             ],
             'xaxis' => [
@@ -99,7 +102,7 @@ class ProjectMilestone extends ApexChartWidget
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,
-                    'columnWidth' => '55%',
+                    'columnWidth' => '45%',
                     'borderRadius' => 4,
                     'endingShape'=>  'rounded'
                 ]
@@ -113,40 +116,12 @@ class ProjectMilestone extends ApexChartWidget
                 'labels' => [
                     'colors' => '#9ca3af'
                 ]
+            ],
+            'colors' => [
+                '#EA580C','#16A34A','#FDE047'
+
             ]
         ];
-
-
-       /* return [
-            'chart' => [
-                'type' => 'bar',
-                'height' => 300,
-            ],
-            'series' => [
-                [
-                    'name' => 'Total Number of Test Cases',
-                    'data' => $this->milestoneCounter['milestone_count'],
-                ],
-            ],
-            'xaxis' => [
-                'categories' => $this->milestoneCounter['milestone_name'],
-                'labels' => [
-                    'style' => [
-                        'colors' => '#9ca3af',
-                        'fontWeight' => 600,
-                    ],
-                ],
-            ],
-            'yaxis' => [
-                'labels' => [
-                    'style' => [
-                        'colors' => '#9ca3af',
-                        'fontWeight' => 600,
-                    ],
-                ],
-            ],
-            'colors' => ['#6366f1'],
-        ];*/
     }
 
     public function fetchData()
@@ -160,6 +135,23 @@ class ProjectMilestone extends ApexChartWidget
                 $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
                 $this->milestoneCounter['milestone_name'][] = $milestone->milestone_name;
                 $this->milestoneCounter['milestone_count'][] = $runcase->count();
+                $testRunCasesUntested = 0;
+                $testRunCasesExecuted = 0;
+                foreach ($runcase as $runCaseData)
+                {
+                    // Test Run Cases
+                     $testRunCasesUntested += RunCase::whereRunId($runCaseData->id)->whereIn('status', [
+                         'Untested',  "To Be Determined"
+                     ])->get()->count();
+                    $testRunCasesExecuted +=  RunCase::whereRunId($runCaseData->id)->whereIn('status', [
+                        'Passed',  'Failed', 'Retest', 'Blocked', 'Skipped'
+                    ])->get()->count();
+
+                }
+                $this->milestoneCounter['executed'][] = $testRunCasesExecuted ;
+                $this->milestoneCounter['untested'][] =  $testRunCasesUntested;
+
+//                ddd($this->milestoneCounter);
             }
         }
     }
