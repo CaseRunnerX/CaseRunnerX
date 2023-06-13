@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Filament\Pages\Profile;
 use App\Filament\Resources\ProjectsResource;
 use App\Filament\Resources\RunResource;
 use App\Filament\Resources\UserResource;
