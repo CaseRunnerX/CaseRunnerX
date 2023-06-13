@@ -42,7 +42,7 @@ class Projects extends Model
         'other',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
 
     public function getAutoNumberOptions()
@@ -50,12 +50,12 @@ class Projects extends Model
         return [
             'test_plan' => [
                 'format' => $this->account.' - ?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 5 // The number of digits in an autonumber
+                'length' => 5, // The number of digits in an autonumber
             ],
             'project_name' => [
                 'format' => $this->application.'-'.$this->account.'-'.$this->project_type.'-?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 5 // The number of digits in an autonumber
-            ]
+                'length' => 5, // The number of digits in an autonumber
+            ],
         ];
     }
 

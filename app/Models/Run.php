@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
@@ -25,12 +24,12 @@ class Run extends Model
         'status',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
 
     protected $casts = [
         'test_suite_id' => 'array',
-        'milestone_id' => 'array'
+        'milestone_id' => 'array',
     ];
 
     public function runCases(): HasMany
@@ -48,9 +47,10 @@ class Run extends Model
         return $this->belongsTo(Projects::class, 'project_id', 'id');
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
-        static::deleting(function($run) {
+        static::deleting(function ($run) {
             $run->runCases()->delete();
         });
     }

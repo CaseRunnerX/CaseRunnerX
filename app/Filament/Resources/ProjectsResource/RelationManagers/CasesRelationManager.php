@@ -18,7 +18,9 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class CasesRelationManager extends RelationManager
 {
     protected static string $relationship = 'cases';
-    protected static ?string $title = "Test Cases";
+
+    protected static ?string $title = 'Test Cases';
+
     protected static ?string $recordTitleAttribute = 'test_plan_id';
 
     public static function form(Form $form): Form
@@ -30,7 +32,7 @@ class CasesRelationManager extends RelationManager
                         ->visibleOn('view')
                         ->disabled(),
                     Forms\Components\Select::make('suite_id')
-                        ->options(fn(RelationManager $livewire) => Suites::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('suite_name', 'id'))
+                        ->options(fn (RelationManager $livewire) => Suites::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('suite_name', 'id'))
                         ->label('Test Suite Name'),
                     Forms\Components\TextInput::make('case_name')
                         ->required()
@@ -41,7 +43,7 @@ class CasesRelationManager extends RelationManager
                         ->options([
                             'Low' => 'Low',
                             'Medium' => 'Medium',
-                            'High' => 'High'
+                            'High' => 'High',
                         ])->default('Low'),
                     Forms\Components\Select::make('status')
                         ->options([
@@ -50,7 +52,7 @@ class CasesRelationManager extends RelationManager
                             'Retest' => 'Retest',
                             'Blocked' => 'Blocked',
                             'Skipped' => 'Skipped',
-                            'To Be Determined' => 'To Be Determined'
+                            'To Be Determined' => 'To Be Determined',
                         ])->visibleOn('edit'),
                     Forms\Components\Select::make('case_type')
                         ->options([
@@ -65,7 +67,7 @@ class CasesRelationManager extends RelationManager
                             'Security' => 'Security',
                             'Smoke & Sanity' => 'Smoke & Sanity',
                             'Usability' => 'Usability',
-                            'Other' => 'Other'
+                            'Other' => 'Other',
                         ])
                         ->required(),
                     Forms\Components\TextInput::make('reference')
@@ -75,7 +77,7 @@ class CasesRelationManager extends RelationManager
                             ->required()
                             ->numeric(),
                         TinyEditor::make('Steps description')
-                            ->required()
+                            ->required(),
                     ])
                         ->required()
                         ->createItemButtonLabel('Add step'),
@@ -87,7 +89,7 @@ class CasesRelationManager extends RelationManager
                     Forms\Components\TextInput::make('created_by'),
                     Forms\Components\TextInput::make('updated_by'),
                     Forms\Components\TextInput::make('deleted_by'),
-                ])->visibleOn('view')
+                ])->visibleOn('view'),
             ]);
     }
 
@@ -103,7 +105,7 @@ class CasesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('case_type'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -116,6 +118,7 @@ class CasesRelationManager extends RelationManager
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['created_by'] = User::find($data['created_by'])?->name ?? null;
                         $data['updated_by'] = User::find($data['updated_by'])?->name ?? null;
+
                         return $data;
                     }),
                 Tables\Actions\EditAction::make(),

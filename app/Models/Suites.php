@@ -21,7 +21,7 @@ class Suites extends Model
         'description',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
 
     public function getAutoNumberOptions()
@@ -29,14 +29,11 @@ class Suites extends Model
         return [
             'suite_number' => [
                 'format' => '?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 8 // The number of digits in an autonumber
-            ]
+                'length' => 8, // The number of digits in an autonumber
+            ],
         ];
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function milestone(): BelongsTo
     {
         return $this->belongsTo(Milestone::class, 'milestone_id', 'id');

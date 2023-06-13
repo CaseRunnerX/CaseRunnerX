@@ -2,18 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
-use Filament\Resources\Resource;
-use Illuminate\Support\Facades\Hash;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\BooleanColumn;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
+use App\Models\User;
+use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Hash;
 use STS\FilamentImpersonate\Impersonate;
 
 class UserResource extends Resource
@@ -57,19 +57,19 @@ class UserResource extends Resource
             Forms\Components\TextInput::make('password')->label(trans('filament-user::user.resource.password'))
                 ->password()
                 ->maxLength(255)
-                ->dehydrateStateUsing(static function ($state) use ($form){
-                    if(!empty($state)){
+                ->dehydrateStateUsing(static function ($state) use ($form) {
+                    if (! empty($state)) {
                         return Hash::make($state);
                     }
 
                     $user = User::find($form->getColumns());
-                    if($user){
+                    if ($user) {
                         return $user->password;
                     }
-            }),
+                }),
         ];
 
-        if(config('filament-user.shield')){
+        if (config('filament-user.shield')) {
             $rows[] = Forms\Components\MultiSelect::make('roles')->relationship('roles', 'name')->label(trans('filament-user::user.resource.roles'));
         }
 
@@ -101,7 +101,7 @@ class UserResource extends Resource
                     ->query(fn (Builder $query): Builder => $query->whereNull('email_verified_at')),
             ]);
 
-        if(config('filament-user.impersonate')){
+        if (config('filament-user.impersonate')) {
             $table->prependActions([
                 Impersonate::make('impersonate'),
             ]);

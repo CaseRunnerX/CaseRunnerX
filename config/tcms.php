@@ -10,7 +10,7 @@ return [
         'Zoho' => 'Zoho',
         'SugarCRM' => 'Sugar CRM',
         'SuiteCRM' => 'Suite CRM',
-        'Laravel' => 'Laravel'
+        'Laravel' => 'Laravel',
     ],
 
     /*
@@ -20,7 +20,5 @@ return [
         'Fix Bid' => 'Fix Bid',
         'Premium Support' => 'Premium Support',
     ],
-
-
 
 ];

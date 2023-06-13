@@ -12,8 +12,7 @@ class SystemInitializeCommand extends Command
 
     public function handle(): void
     {
-        if($this->confirm('Are you sure you want to continue?', true))
-        {
+        if ($this->confirm('Are you sure you want to continue?', true)) {
             // Generate Key
             $this->newLine(2);
             $this->info('Generating new System Key!');
@@ -25,11 +24,10 @@ class SystemInitializeCommand extends Command
             try {
 
                 $this->call('shield:generate', [
-                    '--all'
-                    ]);
+                    '--all',
+                ]);
                 $this->info('✅ Roles and permission has been generated');
-            }catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $this->error('❌ Error during generating Roles and Permissions');
                 $this->warn($e);
             }
@@ -39,8 +37,7 @@ class SystemInitializeCommand extends Command
             try {
                 $this->call('storage:link');
                 $this->info('✅ Storage path has been link to the public folder');
-            }catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $this->error('❌ Error during creating symlink for the storage path');
                 $this->warn($e);
             }
@@ -50,8 +47,7 @@ class SystemInitializeCommand extends Command
             try {
                 $this->call('shield:super-admin');
                 $this->info('✅ Super Admin account has been created');
-            }catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $this->error('❌ Error during creation of super admin account');
                 $this->warn($e);
             }

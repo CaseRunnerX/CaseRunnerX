@@ -18,9 +18,9 @@ class ViewProjects extends ViewRecord
             Actions\EditAction::make(),
             Actions\DeleteAction::make(),
             Actions\ForceDeleteAction::make()
-                ->visible(fn(): bool => isset($this->record->deleted_at) ?? false),
+                ->visible(fn (): bool => isset($this->record->deleted_at) ?? false),
             Actions\RestoreAction::make()
-                ->visible(fn(): bool => isset($this->record->deleted_at) ?? false),
+                ->visible(fn (): bool => isset($this->record->deleted_at) ?? false),
         ];
     }
 
@@ -29,6 +29,7 @@ class ViewProjects extends ViewRecord
         $data['created_by'] = $this->record->creator->name ?? null;
         $data['updated_by'] = $this->record->editor->name ?? null;
         $data['deleted_by'] = $this->record->destroyer->name ?? null;
+
         return $data;
     }
 
@@ -41,11 +42,8 @@ class ViewProjects extends ViewRecord
         ];
     }
 
-
     public function hasCombinedRelationManagerTabsWithForm(): bool
     {
         return true;
     }
-
-
 }

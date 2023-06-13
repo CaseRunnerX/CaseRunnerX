@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\RunResource\RelationManagers;
 
 use App\Models\Cases;
-use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeField;
 use Filament\Forms;
@@ -11,16 +10,15 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class RunCasesRelationManager extends RelationManager
 {
     protected static string $relationship = 'runCases';
-    protected static ?string $title = "Test Cases";
+
+    protected static ?string $title = 'Test Cases';
 
     protected static ?string $recordTitleAttribute = 'case_name';
 
@@ -42,7 +40,7 @@ class RunCasesRelationManager extends RelationManager
                         'Retest' => 'Retest',
                         'Blocked' => 'Blocked',
                         'Skipped' => 'Skipped',
-                        'To Be Determined' => 'To Be Determined'
+                        'To Be Determined' => 'To Be Determined',
                     ])
                     ->reactive()
                     ->default('Untested')
@@ -62,7 +60,7 @@ class RunCasesRelationManager extends RelationManager
                         ->required()
                         ->maxLength(255),
                 ])
-                ->visible(fn (\Closure $get) => $get('status') === 'Failed')
+                    ->visible(fn (\Closure $get) => $get('status') === 'Failed'),
             ])->columns(1);
     }
 
@@ -84,7 +82,7 @@ class RunCasesRelationManager extends RelationManager
                                 'Retest' => 'Retest',
                                 'Blocked' => 'Blocked',
                                 'Skipped' => 'Skipped',
-                                'To Be Determined' => 'To Be Determined'
+                                'To Be Determined' => 'To Be Determined',
                             ])
                             ->colors([
                                 '#FDE047' => 'Untested',
@@ -93,7 +91,7 @@ class RunCasesRelationManager extends RelationManager
                                 '#F472B6' => 'Retest',
                                 '#52525B' => 'Blocked',
                                 '#CA8A04' => 'Skipped',
-                                '#7C3AED' => 'To Be Determined'
+                                '#7C3AED' => 'To Be Determined',
                             ]),
                     ]),
 
@@ -102,28 +100,31 @@ class RunCasesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-//                Tables\Actions\CreateAction::make(),
+                //                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['case_id'] = Cases::find($data['case_id'])?->case_name ?? null;
+
                         return $data;
                     }),
                 Tables\Actions\EditAction::make()
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['case_id'] = Cases::find($data['case_id'])?->case_name ?? null;
+
                         return $data;
                     })
                     ->mutateFormDataUsing(function (array $data, Model $record): array {
-                        $data['case_id'] =  $record->case_id;
+                        $data['case_id'] = $record->case_id;
+
                         return $data;
                     }),
-//                Tables\Actions\DeleteAction::make(),
+                //                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkAction::make('UpdateStatus')
-                ->label('Mass Update Status')
+                    ->label('Mass Update Status')
                     ->action(function (Collection $records, array $data): void {
                         foreach ($records as $record) {
                             $record->status = $data['status_update'];
@@ -139,13 +140,13 @@ class RunCasesRelationManager extends RelationManager
                                 'Retest' => 'Retest',
                                 'Blocked' => 'Blocked',
                                 'Skipped' => 'Skipped',
-                                'To Be Determined' => 'To Be Determined'
+                                'To Be Determined' => 'To Be Determined',
                             ])
                             ->reactive()
                             ->default('Untested')
                             ->required(),
                     ])
-                    ->deselectRecordsAfterCompletion()
+                    ->deselectRecordsAfterCompletion(),
             ]);
     }
 }

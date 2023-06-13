@@ -208,7 +208,7 @@ return [
 
     'send_livewire_failed_validation' => [
         'enabled' => env('DS_SEND_LIVEWIRE_FAILED_VALIDATION', false),
-        'sleep'   => env('DS_SEND_LIVEWIRE_FAILED_VALIDATION_SLEEP', 400),
+        'sleep' => env('DS_SEND_LIVEWIRE_FAILED_VALIDATION_SLEEP', 400),
     ],
 
     /*
@@ -271,27 +271,27 @@ return [
 
     'ide_handlers' => [
         'atom' => [
-            'handler'        => 'atom://core/open/file?filename=',
+            'handler' => 'atom://core/open/file?filename=',
             'line_separator' => '&line=',
         ],
         'phpstorm' => [
-            'handler'        => 'phpstorm://open?file=',
+            'handler' => 'phpstorm://open?file=',
             'line_separator' => '&line=',
         ],
         'sublime' => [
-            'handler'        => 'subl://open?url=file://',
+            'handler' => 'subl://open?url=file://',
             'line_separator' => '&line=',
         ],
         'vscode' => [
-            'handler'        => 'vscode://file/',
+            'handler' => 'vscode://file/',
             'line_separator' => ':',
         ],
         'vscode_remote' => [
-            'handler'        => 'vscode://vscode-remote/',
+            'handler' => 'vscode://vscode-remote/',
             'line_separator' => ':',
-            'local_path'     => 'wsl+' . env('DS_PREFERRED_WSL_DISTRO', 'Ubuntu20.04LTS'),
-            'remote_path'    => env('DS_REMOTE_PATH', null),
-            'work_dir'       => env('DS_WORKDIR', '/var/www/html'),
+            'local_path' => 'wsl+'.env('DS_PREFERRED_WSL_DISTRO', 'Ubuntu20.04LTS'),
+            'remote_path' => env('DS_REMOTE_PATH', null),
+            'work_dir' => env('DS_WORKDIR', '/var/www/html'),
         ],
     ],
 
@@ -404,13 +404,13 @@ return [
    */
 
     'level_log_colors_map' => [
-        'error'     => env('DS_LOG_COLOR_ERROR', 'border-red-600'),
-        'critical'  => env('DS_LOG_COLOR_CRITICAL', 'border-red-900'),
-        'alert'     => env('DS_LOG_COLOR_ALERT', 'border-red-500'),
+        'error' => env('DS_LOG_COLOR_ERROR', 'border-red-600'),
+        'critical' => env('DS_LOG_COLOR_CRITICAL', 'border-red-900'),
+        'alert' => env('DS_LOG_COLOR_ALERT', 'border-red-500'),
         'emergency' => env('DS_LOG_COLOR_EMERGENCY', 'border-red-600'),
-        'warning'   => env('DS_LOG_COLOR_WARNING', 'border-orange-300'),
-        'notice'    => env('DS_LOG_COLOR_NOTICE', 'border-green-300'),
-        'info'      => env('DS_LOG_COLOR_INFO', 'border-blue-300'),
-        'debug'     => env('DS_LOG_COLOR_INFO', 'border-black'),
+        'warning' => env('DS_LOG_COLOR_WARNING', 'border-orange-300'),
+        'notice' => env('DS_LOG_COLOR_NOTICE', 'border-green-300'),
+        'info' => env('DS_LOG_COLOR_INFO', 'border-blue-300'),
+        'debug' => env('DS_LOG_COLOR_INFO', 'border-black'),
     ],
 ];

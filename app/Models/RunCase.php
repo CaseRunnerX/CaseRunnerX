@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RunCase extends Model
 {
-
     protected $fillable = [
-      'run_id',
-      'case_id',
-      'status',
-      'actual_result',
-      'defect',
-      'failure',
-      'effect',
-      'root_cause',
-      'issue_id'
+        'run_id',
+        'case_id',
+        'status',
+        'actual_result',
+        'defect',
+        'failure',
+        'effect',
+        'root_cause',
+        'issue_id',
     ];
-
 
     public function testCase(): HasMany
     {

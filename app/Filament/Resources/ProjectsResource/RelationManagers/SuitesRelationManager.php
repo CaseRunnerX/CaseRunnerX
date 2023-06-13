@@ -17,7 +17,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SuitesRelationManager extends RelationManager
 {
     protected static string $relationship = 'suites';
-    protected static ?string $title = "Test Suites";
+
+    protected static ?string $title = 'Test Suites';
+
     protected static ?string $recordTitleAttribute = 'suite_name';
 
     public static function form(Form $form): Form
@@ -27,7 +29,7 @@ class SuitesRelationManager extends RelationManager
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Select::make('milestone_id')
                         ->label('Milestone')
-                        ->options(fn(RelationManager $livewire) => Milestone::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('milestone_name', 'id'))
+                        ->options(fn (RelationManager $livewire) => Milestone::all()->where('test_plan_id', $livewire->ownerRecord->id)->pluck('milestone_name', 'id'))
                         ->required(),
                     Forms\Components\TextInput::make('suite_name')
                         ->required()
@@ -45,7 +47,7 @@ class SuitesRelationManager extends RelationManager
                     Forms\Components\TextInput::make('deleted_by'),
                 ])
                     ->visibleOn('view')
-                    ->columns(2)
+                    ->columns(2),
             ]);
     }
 
@@ -59,7 +61,7 @@ class SuitesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('description'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -72,6 +74,7 @@ class SuitesRelationManager extends RelationManager
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['created_by'] = User::find($data['created_by'])?->name ?? null;
                         $data['updated_by'] = User::find($data['updated_by'])?->name ?? null;
+
                         return $data;
                     }),
                 Tables\Actions\EditAction::make(),

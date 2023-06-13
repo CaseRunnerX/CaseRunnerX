@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Filament\Resources\ProjectsResource;
 use App\Filament\Resources\RunResource;
 use App\Filament\Resources\UserResource;
-use App\Models\RunCase;
 use BezhanSalleh\FilamentShield\Resources\RoleResource;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationBuilder;
@@ -28,8 +27,8 @@ class CustNavigationServiceProvider extends ServiceProvider
         Filament::navigation(function (NavigationBuilder $builder): NavigationBuilder {
             return $builder->items([
                 ...Dashboard::getNavigationItems(),
-               ...ProjectsResource::getNavigationItems(),
-               ...RunResource::getNavigationItems()
+                ...ProjectsResource::getNavigationItems(),
+                ...RunResource::getNavigationItems(),
             ])->groups([
                 NavigationGroup::make('Settings & Configuration')
                     ->items([
@@ -39,7 +38,7 @@ class CustNavigationServiceProvider extends ServiceProvider
                     ]),
                 NavigationGroup::make('Roles & Permissions')
                     ->items([
-                        ...RoleResource::getNavigationItems()
+                        ...RoleResource::getNavigationItems(),
                     ]),
             ]);
         });

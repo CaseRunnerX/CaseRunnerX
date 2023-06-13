@@ -6,20 +6,20 @@ return [
      * If you want to use your own resource, you can set this to true.
      * and use `php artisan filament-user:publish` to publish the resource.
      */
-    "publish_resource" => true,
+    'publish_resource' => true,
 
     /*
      * The Group name of the resource.
      */
-    "group" => "Settings",
+    'group' => 'Settings',
 
     /*
      * User Filament Impersonate
      */
-    "impersonate" => true,
+    'impersonate' => true,
 
     /*
      * User Filament Shield
      */
-    "shield" => true,
+    'shield' => true,
 ];

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
-use App\Models\Projects;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -17,7 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class MilestoneRelationManager extends RelationManager
 {
     protected static string $relationship = 'milestone';
-    protected static ?string $title = "Project Milestone";
+
+    protected static ?string $title = 'Project Milestone';
+
     protected static ?string $recordTitleAttribute = 'milestone_name';
 
     public static function form(Form $form): Form
@@ -41,7 +42,7 @@ class MilestoneRelationManager extends RelationManager
                     Forms\Components\TextInput::make('updated_by'),
                 ])
                     ->visibleOn('view')
-                    ->columns(2)
+                    ->columns(2),
             ]);
     }
 
@@ -63,7 +64,7 @@ class MilestoneRelationManager extends RelationManager
                     ->date(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -72,7 +73,8 @@ class MilestoneRelationManager extends RelationManager
                     })
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['assigned_qa'] = auth()->id();
-                        return  $data;
+
+                        return $data;
                     }),
             ])
             ->actions([
@@ -80,6 +82,7 @@ class MilestoneRelationManager extends RelationManager
                     ->mutateRecordDataUsing(function (array $data): array {
                         $data['created_by'] = User::find($data['created_by'])?->name ?? null;
                         $data['updated_by'] = User::find($data['updated_by'])?->name ?? null;
+
                         return $data;
                     }),
                 Tables\Actions\EditAction::make(),

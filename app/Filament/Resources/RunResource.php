@@ -10,7 +10,6 @@ use App\Models\Run;
 use App\Models\Suites;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -18,7 +17,6 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
-use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class RunResource extends Resource
 {
@@ -46,13 +44,13 @@ class RunResource extends Resource
                             ->disabledOn('edit')
                             ->options(Projects::all()->pluck('project_name', 'id'))
                             ->reactive()
-                            ->afterStateHydrated(function(\Closure $get, \Closure $set, $state){
+                            ->afterStateHydrated(function (\Closure $get, \Closure $set, $state) {
                                 $date = $get('test_run_date');
                                 $formatted = $date.' - '.Projects::find($state)?->project_name;
                                 $set('test_run_name', $formatted);
                             })
-                            ->afterStateUpdated(function(\Closure $get, \Closure $set, $state){
-                                $date =Carbon::parse($get('test_run_date'))->toDateString();
+                            ->afterStateUpdated(function (\Closure $get, \Closure $set, $state) {
+                                $date = Carbon::parse($get('test_run_date'))->toDateString();
                                 $formatted = $date.' - '.Projects::find($state)?->project_name;
                                 $set('test_run_name', $formatted);
                             })
@@ -61,14 +59,14 @@ class RunResource extends Resource
                             ->label('Milestone')
                             ->multiple()
                             ->disabledOn('edit')
-                            ->options(fn(\Closure $get) => Milestone::all()->where('test_plan_id', $get('project_id'))->pluck('milestone_name', 'id'))
+                            ->options(fn (\Closure $get) => Milestone::all()->where('test_plan_id', $get('project_id'))->pluck('milestone_name', 'id'))
                             ->reactive()
                             ->required(),
                         Forms\Components\Select::make('test_suite_id')
                             ->label('Test Suite')
                             ->multiple()
                             ->disabledOn('edit')
-                            ->options(fn(\Closure $get) => Suites::all()->whereIn('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
+                            ->options(fn (\Closure $get) => Suites::all()->whereIn('milestone_id', $get('milestone_id'))->pluck('suite_name', 'id'))
                             ->required(),
                         Forms\Components\Select::make('status')
                             ->options([
@@ -95,7 +93,7 @@ class RunResource extends Resource
                 ])
                     ->columns(2)
                     ->visibleOn('view')
-                    ->disabled()
+                    ->disabled(),
             ]);
     }
 
@@ -127,7 +125,7 @@ class RunResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\RunCasesRelationManager::class
+            RelationManagers\RunCasesRelationManager::class,
         ];
     }
 

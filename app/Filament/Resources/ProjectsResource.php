@@ -26,6 +26,7 @@ class ProjectsResource extends Resource
     {
         return $record->project_name;
     }
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['project_name', 'author.name', 'account'];
@@ -44,11 +45,11 @@ class ProjectsResource extends Resource
                         ->label('Application')
                         ->required()
                         ->disablePlaceholderSelection()
-                        ->options(config('tcms.applications',[
+                        ->options(config('tcms.applications', [
                             'Zoho' => 'Zoho',
                             'SugarCRM' => 'Sugar CRM',
                             'SuiteCRM' => 'Suite CRM',
-                            'Laravel' => 'Laravel'
+                            'Laravel' => 'Laravel',
                         ])),
                     Forms\Components\Select::make('project_type')
                         ->label('Project Type')
@@ -88,18 +89,18 @@ class ProjectsResource extends Resource
                         ->disabled()
                         ->maxLength(255),
                     Forms\Components\TextInput::make('author_id')
-                    ->label('Author')
-                    ->disabled()
-                    ->visibleOn('view'),
+                        ->label('Author')
+                        ->disabled()
+                        ->visibleOn('view'),
                     Forms\Components\Textarea::make('computing_environment')
-                    ->label('Type of Computing Environment'),
+                        ->label('Type of Computing Environment'),
                     Forms\Components\Textarea::make('software_type')
-                    ->label('Type of Software'),
+                        ->label('Type of Software'),
                     Forms\Components\Textarea::make('testing_purposes')
                         ->label('Purpose of testing')
                         ->required(),
                     Forms\Components\Textarea::make('user_demo_graphics')
-                    ->label('User Demo Graphics'),
+                        ->label('User Demo Graphics'),
                     Forms\Components\Textarea::make('assumptions')
                         ->label('Assumption')
                         ->required(),
@@ -137,7 +138,7 @@ class ProjectsResource extends Resource
                 ])
                     ->columns(2)
                     ->visibleOn('view')
-                    ->disabled()
+                    ->disabled(),
             ]);
     }
 
@@ -173,9 +174,9 @@ class ProjectsResource extends Resource
     public static function getRelations(): array
     {
         return [
-           RelationManagers\MilestoneRelationManager::class,
-           RelationManagers\SuitesRelationManager::class,
-           RelationManagers\CasesRelationManager::class
+            RelationManagers\MilestoneRelationManager::class,
+            RelationManagers\SuitesRelationManager::class,
+            RelationManagers\CasesRelationManager::class,
         ];
     }
 

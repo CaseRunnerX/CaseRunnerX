@@ -21,9 +21,8 @@ class Milestone extends Model
         'end_date',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
-
 
     public function project(): BelongsTo
     {
@@ -37,7 +36,7 @@ class Milestone extends Model
 
     public function run(): HasMany
     {
-        return  $this->hasMany(Run::class, 'milestone_id');
+        return $this->hasMany(Run::class, 'milestone_id');
     }
 
     public function qa()

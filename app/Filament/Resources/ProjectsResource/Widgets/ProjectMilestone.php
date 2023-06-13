@@ -6,7 +6,6 @@ use App\Models\Projects;
 use App\Models\Run;
 use App\Models\RunCase;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
@@ -14,15 +13,11 @@ class ProjectMilestone extends ApexChartWidget
 {
     /**
      * Chart Id
-     *
-     * @var string
      */
     protected static string $chartId = 'projectMilestone';
 
     /**
      * Widget Title
-     *
-     * @var string|null
      */
     protected static ?string $heading = 'Project Milestone Analytics';
 
@@ -32,29 +27,24 @@ class ProjectMilestone extends ApexChartWidget
      *
      * @return array
      */
-
     protected static bool $deferLoading = true;
 
     public ?Model $record = null;
 
     protected static ?string $pollingInterval = null;
 
-
     public ?array $milestoneCounter = [];
-
 
     protected function getOptions(): array
     {
 
-
         //showing a loading indicator immediately after the page load
-        if (!$this->readyToLoad) {
+        if (! $this->readyToLoad) {
             return [];
         }
 
         // Fetch test case run
         $this->fetchData();
-
 
         return [
             'chart' => [
@@ -68,11 +58,11 @@ class ProjectMilestone extends ApexChartWidget
                 ],
                 [
                     'name' => 'Total # of Test Cases Executed',
-                    'data' => $this->milestoneCounter['executed'] ?? []
+                    'data' => $this->milestoneCounter['executed'] ?? [],
                 ],
                 [
                     'name' => 'Total # of Test Cases Untested',
-                    'data' => $this->milestoneCounter['untested'] ?? []
+                    'data' => $this->milestoneCounter['untested'] ?? [],
                 ],
             ],
             'xaxis' => [
@@ -87,7 +77,7 @@ class ProjectMilestone extends ApexChartWidget
             'stroke' => [
                 'show' => true,
                 'width' => 2,
-                'colors' => ['transparent']
+                'colors' => ['transparent'],
             ],
             'yaxis' => [
                 'labels' => [
@@ -98,30 +88,30 @@ class ProjectMilestone extends ApexChartWidget
                 ],
             ],
             'fill' => [
-                'opacity' => 1
+                'opacity' => 1,
             ],
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,
                     'columnWidth' => '45%',
                     'borderRadius' => 4,
-                    'endingShape'=>  'rounded'
-                ]
+                    'endingShape' => 'rounded',
+                ],
             ],
-            'dataLabels'=> [
-                'enabled' => false
+            'dataLabels' => [
+                'enabled' => false,
             ],
             'legend' => [
                 'show' => true,
                 'position' => 'top',
                 'labels' => [
-                    'colors' => '#9ca3af'
-                ]
+                    'colors' => '#9ca3af',
+                ],
             ],
             'colors' => [
-                '#EA580C','#16A34A','#FDE047'
+                '#EA580C', '#16A34A', '#FDE047',
 
-            ]
+            ],
         ];
     }
 
@@ -129,30 +119,27 @@ class ProjectMilestone extends ApexChartWidget
     {
         // Fetch test case run
         $projectData = Projects::whereId($this->record->id)->with('milestone')->get();
-        foreach ($projectData as $project)
-        {
-            foreach ($project->milestone as $milestone)
-            {
+        foreach ($projectData as $project) {
+            foreach ($project->milestone as $milestone) {
                 $runcase = Run::whereJsonContains('milestone_id', "{$milestone->id}")->get();
                 $this->milestoneCounter['milestone_name'][] = Str::title($milestone->milestone_name);
                 $this->milestoneCounter['milestone_count'][] = $runcase->count() ?? 0;
                 $testRunCasesUntested = 0;
                 $testRunCasesExecuted = 0;
-                foreach ($runcase as $runCaseData)
-                {
+                foreach ($runcase as $runCaseData) {
                     // Test Run Cases
-                     $testRunCasesUntested += RunCase::whereRunId($runCaseData->id)->whereIn('status', [
-                         'Untested',  "To Be Determined"
-                     ])->get()->count();
-                    $testRunCasesExecuted +=  RunCase::whereRunId($runCaseData->id)->whereIn('status', [
-                        'Passed',  'Failed', 'Retest', 'Blocked', 'Skipped'
+                    $testRunCasesUntested += RunCase::whereRunId($runCaseData->id)->whereIn('status', [
+                        'Untested',  'To Be Determined',
+                    ])->get()->count();
+                    $testRunCasesExecuted += RunCase::whereRunId($runCaseData->id)->whereIn('status', [
+                        'Passed',  'Failed', 'Retest', 'Blocked', 'Skipped',
                     ])->get()->count();
 
                 }
-                $this->milestoneCounter['executed'][] = $testRunCasesExecuted ;
-                $this->milestoneCounter['untested'][] =  $testRunCasesUntested;
+                $this->milestoneCounter['executed'][] = $testRunCasesExecuted;
+                $this->milestoneCounter['untested'][] = $testRunCasesUntested;
 
-//                ddd($this->milestoneCounter);
+                //                ddd($this->milestoneCounter);
             }
         }
     }

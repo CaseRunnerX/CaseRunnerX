@@ -13,7 +13,7 @@ return [
     */
 
     'pages' => [
-        'backups' => \ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups::class
+        'backups' => \ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups::class,
     ],
 
     /*
@@ -27,7 +27,7 @@ return [
     */
 
     'polling' => [
-        'interval' => '4s'
+        'interval' => '4s',
     ],
 
     /*

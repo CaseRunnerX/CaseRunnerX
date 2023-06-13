@@ -24,11 +24,11 @@ class Cases extends Model
         'expected_result',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
 
     protected $casts = [
-        'steps' => 'array'
+        'steps' => 'array',
     ];
 
     public function getAutoNumberOptions()
@@ -36,8 +36,8 @@ class Cases extends Model
         return [
             'case_number' => [
                 'format' => '?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 8 // The number of digits in an autonumber
-            ]
+                'length' => 8, // The number of digits in an autonumber
+            ],
         ];
     }
 

@@ -8,19 +8,29 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class ProjectsWidget extends ApexChartWidget
 {
+    private ?int $Untested = 0;
 
-    private ?int $Untested = 0, $Passed = 0, $Failed = 0, $Retest = 0, $Blocked = 0,$Skipped = 0, $tbd = 0, $ntc = 0;
+    private ?int $Passed = 0;
+
+    private ?int $Failed = 0;
+
+    private ?int $Retest = 0;
+
+    private ?int $Blocked = 0;
+
+    private ?int $Skipped = 0;
+
+    private ?int $tbd = 0;
+
+    private ?int $ntc = 0;
+
     /**
      * Chart Id
-     *
-     * @var string
      */
     protected static string $chartId = 'projectsWidget';
 
     /**
      * Widget Title
-     *
-     * @var string|null
      */
     protected static ?string $heading = 'Test Cases Analytics';
 
@@ -30,7 +40,6 @@ class ProjectsWidget extends ApexChartWidget
      *
      * @return array
      */
-
     protected static bool $deferLoading = true;
 
     public ?Model $record = null;
@@ -40,41 +49,37 @@ class ProjectsWidget extends ApexChartWidget
     protected function getOptions(): array
     {
         //showing a loading indicator immediately after the page load
-        if (!$this->readyToLoad) {
+        if (! $this->readyToLoad) {
             return [];
         }
 
         // Fetch test case run
-//        ddd($this->record->id);
+        //        ddd($this->record->id);
         $projectData = Projects::whereId($this->record->id)->with('runs.runCases')->get();
-//        ddd($projectData);
-        foreach ($projectData as $project)
-        {
-            foreach ($project->runs as $run)
-            {
-                foreach ($run->runCases as $runCase)
-                {
-                    switch ($runCase->status)
-                    {
-                        case "Untested":
+        //        ddd($projectData);
+        foreach ($projectData as $project) {
+            foreach ($project->runs as $run) {
+                foreach ($run->runCases as $runCase) {
+                    switch ($runCase->status) {
+                        case 'Untested':
                             $this->Untested++;
                             break;
-                        case "Passed":
+                        case 'Passed':
                             $this->Passed++;
                             break;
-                        case "Failed":
+                        case 'Failed':
                             $this->Failed++;
                             break;
-                        case "Retest":
+                        case 'Retest':
                             $this->Retest++;
                             break;
-                        case "Blocked":
+                        case 'Blocked':
                             $this->Blocked++;
                             break;
-                        case "Skipped":
+                        case 'Skipped':
                             $this->Skipped++;
                             break;
-                        case "To Be Determined":
+                        case 'To Be Determined':
                             $this->tbd++;
                             break;
                         default:
