@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75ede2cd3e9634c495136d23a0b7fd72",
+    "content-hash": "ae8e3a4754adc6423cfffc645412acc8",
     "packages": [
         {
             "name": "3x1io/filament-user",
@@ -346,16 +346,16 @@
         },
         {
             "name": "awcodes/overlook",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/awcodes/overlook.git",
-                "reference": "09cb61621ca464eadcbf064d9901e1930af4bb00"
+                "reference": "1f543a11ac06c2c5d80264759fb21b7d958c51b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/awcodes/overlook/zipball/09cb61621ca464eadcbf064d9901e1930af4bb00",
-                "reference": "09cb61621ca464eadcbf064d9901e1930af4bb00",
+                "url": "https://api.github.com/repos/awcodes/overlook/zipball/1f543a11ac06c2c5d80264759fb21b7d958c51b6",
+                "reference": "1f543a11ac06c2c5d80264759fb21b7d958c51b6",
                 "shasum": ""
             },
             "require": {
@@ -420,7 +420,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-29T12:49:13+00:00"
+            "time": "2023-06-14T14:30:41+00:00"
         },
         {
             "name": "bezhansalleh/filament-shield",
@@ -5038,16 +5038,16 @@
         },
         {
             "name": "shuvroroy/filament-spatie-laravel-backup",
-            "version": "v1.3.1",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shuvroroy/filament-spatie-laravel-backup.git",
-                "reference": "abd49da4d7dc4eab8577c0196c8bcec7f4a93359"
+                "reference": "7670fd8c8c4ef6ed06faee801033b94b8ff7aad4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shuvroroy/filament-spatie-laravel-backup/zipball/abd49da4d7dc4eab8577c0196c8bcec7f4a93359",
-                "reference": "abd49da4d7dc4eab8577c0196c8bcec7f4a93359",
+                "url": "https://api.github.com/repos/shuvroroy/filament-spatie-laravel-backup/zipball/7670fd8c8c4ef6ed06faee801033b94b8ff7aad4",
+                "reference": "7670fd8c8c4ef6ed06faee801033b94b8ff7aad4",
                 "shasum": ""
             },
             "require": {
@@ -5101,7 +5101,7 @@
             ],
             "support": {
                 "issues": "https://github.com/shuvroroy/filament-spatie-laravel-backup/issues",
-                "source": "https://github.com/shuvroroy/filament-spatie-laravel-backup/tree/v1.3.1"
+                "source": "https://github.com/shuvroroy/filament-spatie-laravel-backup/tree/v1.2.6"
             },
             "funding": [
                 {
@@ -5109,7 +5109,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-30T17:12:26+00:00"
+            "time": "2022-11-16T14:46:17+00:00"
         },
         {
             "name": "shuvroroy/filament-spatie-laravel-health",
@@ -11295,16 +11295,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "ec4dd16476b802dbdc6b4467f84032837e316b8c"
+                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/ec4dd16476b802dbdc6b4467f84032837e316b8c",
-                "reference": "ec4dd16476b802dbdc6b4467f84032837e316b8c",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/47794d19e3215ace9e005a8f200cd7cc7be52572",
+                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572",
                 "shasum": ""
             },
             "require": {
@@ -11341,7 +11341,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/backtrace/tree/1.4.0"
+                "source": "https://github.com/spatie/backtrace/tree/1.4.1"
             },
             "funding": [
                 {
@@ -11353,7 +11353,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-03-04T08:57:24+00:00"
+            "time": "2023-06-13T14:35:04+00:00"
         },
         {
             "name": "spatie/flare-client-php",

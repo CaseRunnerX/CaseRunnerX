@@ -4,6 +4,8 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use ShuvroRoy\FilamentSpatieLaravelBackup\Models\BackupDestination;
+use ShuvroRoy\FilamentSpatieLaravelBackup\Models\BackupDestinationStatus;
 
 class AuthServiceProvider extends ServiceProvider
 {
