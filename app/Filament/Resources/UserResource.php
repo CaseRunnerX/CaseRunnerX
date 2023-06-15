@@ -24,6 +24,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()->where('id', '!=', auth()->id());
+    }
+
     protected static function getNavigationLabel(): string
     {
         return trans('filament-user::user.resource.label');
