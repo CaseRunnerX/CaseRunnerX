@@ -26,4 +26,9 @@ class EditUser extends EditRecord
     {
         return trans('filament-user::user.resource.title.edit');
     }
+
+    public function getRelationManagers(): array
+    {
+        return [];
+    }
 }
