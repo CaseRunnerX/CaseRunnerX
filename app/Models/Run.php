@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 use Wildside\Userstamps\Userstamps;
 
-class Run extends Model
+class Run extends Model implements Auditable
 {
-    use SoftDeletes, Userstamps;
+    use SoftDeletes, Userstamps, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'test_run_date',

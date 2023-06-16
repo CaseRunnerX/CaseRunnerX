@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 use Wildside\Userstamps\Userstamps;
 
-class Projects extends Model
+class Projects extends Model implements Auditable
 {
-    use Userstamps, AutoNumberTrait, SoftDeletes;
+    use Userstamps, AutoNumberTrait, SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'account',
