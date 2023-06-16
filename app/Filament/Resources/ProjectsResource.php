@@ -13,6 +13,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class ProjectsResource extends Resource
 {
@@ -177,6 +178,7 @@ class ProjectsResource extends Resource
             RelationManagers\MilestoneRelationManager::class,
             RelationManagers\SuitesRelationManager::class,
             RelationManagers\CasesRelationManager::class,
+            AuditsRelationManager::class,
         ];
     }
 
