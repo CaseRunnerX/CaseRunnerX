@@ -1,6 +1,6 @@
 ## Project Status
 
-:construction: Working in Progress
+:construction: This project is still under **Developement stage**, *do not use for production* :construction:
 
 ---
 
